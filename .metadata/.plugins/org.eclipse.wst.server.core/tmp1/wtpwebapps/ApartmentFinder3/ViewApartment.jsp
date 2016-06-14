@@ -28,6 +28,7 @@
 			</div>
 			<div class="panel-footer clearfix">
 				<input class="btn btn-primary pull-right" type="submit" value="Select" />
+				<a href="ApartmentSearchResults.jsp">Back</a>
 			</div>
 		</div>
 	</form>

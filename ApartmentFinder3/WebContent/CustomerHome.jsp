@@ -2,7 +2,12 @@
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
+
+			
 <t:layout>
+<script type="text/javascript">   
+	$(function() {$( "#move_in_date" ).datepicker();}); 
+</script>
     <form method="post" action="ApartmentSearch">
     	<div class="panel panel-default marginLeft marginRight">
 	    	<div class="panel-heading">
@@ -12,24 +17,24 @@
 	    		<dl class="dl-horizontal">
 	    			<dt>Move-in Date</dt>
 	    			<dd>
-	    				<input class="form-control" type="text" name="move_in_date" value="" />
+	    				<div class='searchfield'><input class="form-control" type="text" name="move_in_date" id="move_in_date"/></div>
 	    			</dd>
 	    			<dt>Price Range</dt>
 	    			<dd>
-	    				<input class="form-control" type="text" name="price_range_low" value="" /> - <input class="form-control" type="text" name="price_range_high" value="" />
+	    				<div class='searchfield'><input class="form-control price-range" type="text" name="price_range_low" value="" /> - <input class="form-control price-range" type="text" name="price_range_high" value="" /></div>
 	    			</dd>
 	    			<dt>Location</dt>
 	    			<dd>
-	    				<input class="form-control" type="text" name="location" value="" />
+	    				<div class='searchfield'><input class="form-control" type="text" name="location" value="" /></div>
 	    			</dd>
 	    			<dt>Apartment Type</dt>
 	    			<dd>
-	    				<select  class="form-control" name="apartment_type">
+	    				<div class='searchfield'><select  class="form-control searchfield" name="apartment_type">
 							<option value="studio">Studio</option>
 							<option value="1bd">1 BD</option>
 							<option value="2bd">2 BD</option>
 							<option value="3bd">3 BD</option>
-						</select>
+						</select></div>
 	    			</dd>
 	    		</dl>
 	    	</div>
