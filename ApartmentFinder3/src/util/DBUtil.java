@@ -23,7 +23,7 @@ public class DBUtil {
 			String url = properties.getProperty( "url" );
 			String user = properties.getProperty( "user" );
 			String password = properties.getProperty( "password" );
-			Class.forName( driver );
+			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection( url, user, password );
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -48,7 +48,7 @@ public class Register extends HttpServlet {
 				response.sendRedirect("Welcome.jsp");
 			}
 			else{
-				String query = "insert into users (username, password) values (?,?)";
+				String query = "insert into User (username, password) values (?,?)";
 				PreparedStatement preparedStatement = conn.prepareStatement( query );
 				preparedStatement.setString( 1, user.getUserName() );
 				preparedStatement.setString( 2, user.getPassword() );

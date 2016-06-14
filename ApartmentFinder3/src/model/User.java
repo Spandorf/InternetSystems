@@ -37,7 +37,7 @@ public class User {
 	public static User getUserByName(String username) {
 		Connection conn = DBUtil.getConnection();
 		try {
-			String query = "select * from users where username=?";
+			String query = "select * from User where username=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString(1, username);
 			ResultSet resultSet = preparedStatement.executeQuery();
