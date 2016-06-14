@@ -4,15 +4,17 @@ package servlet;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Properties;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Users;
+import model.User;
+import util.DBUtil;
 
 /**
  * Servlet implementation class Register
@@ -35,48 +37,31 @@ public class Register extends HttpServlet {
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		
-		/* The users.properties file is stored in the "WEB-INF" folder.
-		   To access this file, you will need its absolute path. */
+		User user = new User(userName, password);
 		
-		/*
-		 * Note: the content of the properties file may not be visible
-		 */
-		 
-		/* Following two statements are used to obtain the absolute path 
-		   of the users.properies file from its relative path. */
 		ServletContext sc = this.getServletContext();
 		String propFilePath = sc.getRealPath("/WEB-INF/users.properties");
 		
-		Properties p = new Properties();
-		
-		FileInputStream fis = null;
-		
-		try {		
-			fis = new FileInputStream(propFilePath);
-			p.load(fis);
-			System.out.println(userName);
-			p.setProperty(userName, password);
-			p.store(new FileOutputStream(propFilePath), null);
-			response.sendRedirect("Welcome.jsp"); // Link-redirection
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (fis != null) {
-				fis.close();
+		Connection conn = DBUtil.getConnection();
+		try {
+			if(User.doesUserExist(userName)){
+				response.sendRedirect("Welcome.jsp");
 			}
+			else{
+				String query = "insert into users (username, password) values (?,?)";
+				PreparedStatement preparedStatement = conn.prepareStatement( query );
+				preparedStatement.setString( 1, user.getUserName() );
+				preparedStatement.setString( 2, user.getPassword() );
+				preparedStatement.executeUpdate();
+				preparedStatement.close();
+				response.sendRedirect("Welcome.jsp");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+	
 		
-		/*
-		// Registration via the Users class
-		Users aUser = new Users(userName, password);
 		
-		//First check whether the user already exists via methods from Users class
-		
-		// Register the Users object
-		aUser.registerUser(aUser, propFilePath);
-		response.sendRedirect("Welcome.jsp"); */	
-			
 	}
 
 	/**
