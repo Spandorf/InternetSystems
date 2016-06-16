@@ -36,6 +36,8 @@
 						<li>
 							<a href="ManageApplication.jsp">Manage Applications</a>
 						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
 						<li>
 							<a href="Welcome.jsp">Logout</a>
 						</li>

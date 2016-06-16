@@ -12,13 +12,9 @@
 	<div class="panel-heading">
 		Register 
 	</div>
-	
-	
-	
-	<h2> Register </h2>
 	<div class="panel-body">
+		<h2> Register </h2>
 		<form action=Register>
-	
  		<dl class="dl-horizontal">
 			<dt>User Name:</dt>
 			<dd>
@@ -33,11 +29,8 @@
 				<input class="form-control" id="confirmPassword" type=password name="confirm_password" value="" />
 			</dd>
 		</dl>	
-		<input class="btn btn-default pull-left" type=submit id="registerBtn" value=Register />
+		<input class="btn btn-primary pull-right" type=submit id="registerBtn" value=Register />
 		</form>
-	
    	</div>
-
-
 </div>
 </t:layout>

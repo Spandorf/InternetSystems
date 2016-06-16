@@ -7,13 +7,9 @@
 	<div class="panel-heading">
 		Apartment Finder
 	</div>
-	
-	
-	
-	<h2> Login </h2>
 	<div class="panel-body">
+	<h2> Login </h2>
 	<form action=Login>
-	
  		<dl class="dl-horizontal">
 			<dt>User Name:</dt>
 			<dd>
@@ -25,14 +21,10 @@
 			</dd>
 		</dl>	
 	<!-- Navigation links --> 
-   		<input class="btn btn-default pull-left" type=submit value="Login" />
-   		<a class="btn btn-primary pull-right" href="Register.jsp"> Are you a New User? </a>
+   		<input class="btn btn-primary pull-right" type=submit value="Login" />
+   		<a class="btn btn-default pull-left" href="Register.jsp"> Are you a New User? </a>
 
 	</form>
 	</div>
-	
-
-
-
 </div>
 </t:layout>

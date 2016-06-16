@@ -1,9 +1,17 @@
 package model;
 
+import java.util.Properties;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import util.DBUtil;
 
@@ -58,7 +66,8 @@ public class User {
 		}
 		
 	}
-	/*public void registerUser(Users aUser, String propFilePath) {
+	
+	public static void registerUser(User aUser, String propFilePath) {
 		
 		Properties p = new Properties();
 		FileInputStream fis = null;
@@ -85,9 +94,45 @@ public class User {
 				}
 			}
 		}
-	}*/
+	}
 	
-	// validateUser
+	public static Boolean validateUser(User aUser, String propFilePath) {
+		
+		Properties p = new Properties();
+		FileInputStream fis = null;
+		
+		String realPassword = null;
+		
+		try {
+			fis = new FileInputStream(propFilePath);
+			p.load(fis);
+			if(!p.containsKey(aUser.userName)) {
+				return false;
+			}
+			realPassword = p.getProperty(aUser.userName);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if(fis!=null) {
+				try {
+					fis.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		if(realPassword.equals(aUser.password))
+			return true;
+		else
+			return false;
+	}
+	
 	// removeUser
 	
 	

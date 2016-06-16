@@ -44,7 +44,7 @@
 				</dl>
 			</div>
 			<div class="panel-footer clearfix">
-				<a class="btn btn-danger pull-right" href="CustomerHome.jsp"> Cancel Cancellation </a>
+				<a id="cancelAppBtn" class="btn btn-danger pull-right" href="CustomerHome.jsp"> Cancel Cancellation </a>
 				<a class="btn btn-primary pull-right" href="CancellationConfirmation.jsp"> Confirm Cancellation </a>
 			</div>
 		</div>

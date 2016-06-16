@@ -86,7 +86,7 @@
 					</dl>
 				</div>
 				<div class="panel-footer clearfix">
-					<a class="btn btn-danger pull-right" href="ApartmentSearchResults.jsp"> Cancel Payment </a>
+					<a id="cancelPaymentBtn" class="btn btn-danger pull-right" href="ApartmentSearchResults.jsp"> Cancel Payment </a>
 					<input class="btn btn-primary pull-right" type="submit" value="Confirm Payment" />
 					<input class="btn btn-default pull-left" type="reset" value="Reset" />
 				</div>

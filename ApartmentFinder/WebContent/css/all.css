@@ -13,3 +13,15 @@
 	width: 1000px;
 	margin: auto;
 }
+
+dd {
+	margin-bottom: 10px;
+}
+
+#cancelPaymentBtn {
+	margin-left: 5px;
+}
+
+#cancelAppBtn {
+	margin-left: 5px;
+}

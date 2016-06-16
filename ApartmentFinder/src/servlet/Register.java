@@ -1,8 +1,12 @@
 package servlet;
 
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,15 +17,15 @@ import model.User;
 import util.DBUtil;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class Register
  */
-public class Login extends HttpServlet {
+public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public Register() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,35 +36,36 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
+		
+		User user = new User(userName, password);
+		
 		ServletContext sc = this.getServletContext();
 		String propFilePath = sc.getRealPath("/WEB-INF/users.properties");
 		
-		/* The users.properties file is stored in the "WEB-INF" folder.
-		   To access this file, you will need its absolute path. */
 		
-		/*
-		 * Note: the content of the properties file may not be visible
-		 */
-		 
-		/* Following two statements are used to obtain the absolute path 
-		   of the users.properies file from its relative path. */
-
-		
+		// Register using db
 		Connection conn = DBUtil.getConnection();
-
-		if(User.doesUserExist(userName)){
-			User dbUser = User.getUserByName(userName);
-			if(dbUser.getPassword().equals(password)){
-				response.sendRedirect("CustomerHome.jsp"); // Link-redirection
+		try {
+			if(User.doesUserExist(userName)){
+				response.sendRedirect("Welcome.jsp");
 			}
 			else{
-				response.sendRedirect("Register.jsp"); // Link-redirection
+				String query = "insert into User (username, password) values (?,?)";
+				PreparedStatement preparedStatement = conn.prepareStatement( query );
+				preparedStatement.setString( 1, user.getUserName() );
+				preparedStatement.setString( 2, user.getPassword() );
+				preparedStatement.executeUpdate();
+				preparedStatement.close();
+				response.sendRedirect("Welcome.jsp");
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		else{
-			response.sendRedirect("Register.jsp");
-		}
-
+	
+		// NOTE: If the db is causing errors, use this code instead.
+		/*User.registerUser(user, propFilePath);
+		response.sendRedirect("Welcome.jsp");
+		*/
 	}
 
 	/**
