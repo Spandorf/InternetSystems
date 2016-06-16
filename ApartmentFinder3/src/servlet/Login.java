@@ -1,12 +1,8 @@
 package servlet;
 
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Properties;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
