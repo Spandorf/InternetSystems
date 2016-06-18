@@ -11,7 +11,7 @@
 	       <thead>
 	           <tr>
 	               <th>Landlord</th>
-	               <th>Address</td>
+	               <th>Address</th>
 	               <th>Apartment Type</th>
 	               <th>Area of Apartment</th>
 	               <th>Company rating</th>

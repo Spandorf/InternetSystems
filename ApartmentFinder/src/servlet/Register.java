@@ -27,7 +27,6 @@ public class Register extends HttpServlet {
      */
     public Register() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -38,34 +37,8 @@ public class Register extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		User user = new User(userName, password);
-		
-		ServletContext sc = this.getServletContext();
-		String propFilePath = sc.getRealPath("/WEB-INF/users.properties");
-		
-		
-		// Register using db
-		Connection conn = DBUtil.getConnection();
-		try {
-			if(User.doesUserExist(userName)){
-				response.sendRedirect("Welcome.jsp");
-			}
-			else{
-				String query = "insert into User (username, password) values (?,?)";
-				PreparedStatement preparedStatement = conn.prepareStatement( query );
-				preparedStatement.setString( 1, user.getUserName() );
-				preparedStatement.setString( 2, user.getPassword() );
-				preparedStatement.executeUpdate();
-				preparedStatement.close();
-				response.sendRedirect("Welcome.jsp");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	
-		// NOTE: If the db is causing errors, use this code instead.
-		/*User.registerUser(user, propFilePath);
+		User.registerUser(user);
 		response.sendRedirect("Welcome.jsp");
-		*/
 	}
 
 	/**

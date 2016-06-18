@@ -41,12 +41,12 @@ public class User {
 	public static User getUserByName(String username) {
 		Connection conn = DBUtil.getConnection();
 		try {
-			String query = "select * from User where username=?";
+			String query = "select * from Users where Username=?";
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
 			preparedStatement.setString(1, username);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while( resultSet.next() ) {
-				User user = new User(resultSet.getString("username"), resultSet.getString("password"));
+				User user = new User(resultSet.getString("Username"), resultSet.getString("Password"));
 				return user;
 			}
 			resultSet.close();
@@ -64,12 +64,24 @@ public class User {
 		else{
 			return true;
 		}
-		
 	}
 	
-	public static void registerUser(User aUser, String propFilePath) {
+	public static void registerUser(User user) {
 		
-		Properties p = new Properties();
+		Connection conn = DBUtil.getConnection();
+		try {
+			String query = "insert into Users (Username, Password) values (?,?)";
+			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			preparedStatement.setString(1, user.getUserName());
+			preparedStatement.setString(2, user.getPassword());
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		/*Properties p = new Properties();
 		FileInputStream fis = null;
 		
 		try {
@@ -79,21 +91,18 @@ public class User {
 			p.store(new FileOutputStream(propFilePath), null);
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			if(fis!=null) {
 				try {
 					fis.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-		}
+		}*/
 	}
 	
 	public static Boolean validateUser(User aUser, String propFilePath) {
@@ -111,17 +120,14 @@ public class User {
 			}
 			realPassword = p.getProperty(aUser.userName);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			if(fis!=null) {
 				try {
 					fis.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
