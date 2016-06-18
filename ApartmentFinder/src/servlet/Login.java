@@ -36,15 +36,15 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
+		User userToValidate = new User(userName, password);
 		
-		if(User.doesUserExist(userName)){
-			User dbUser = User.getUserByName(userName);
-			if(dbUser.getPassword().equals(password)){
-				response.sendRedirect("CustomerHome.jsp");
-			}
+		User actualUser = User.validateUser(userToValidate);
+		
+		if(actualUser != null) {
+			response.sendRedirect("CustomerHome.jsp");
+		} else {
+			response.sendRedirect("Register.jsp");
 		}
-		
-		response.sendRedirect("Register.jsp");
 	}
 
 	/**

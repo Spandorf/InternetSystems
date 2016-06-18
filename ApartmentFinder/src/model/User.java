@@ -38,7 +38,43 @@ public class User {
 		this.password = password;
 	}
 	
-	public static User getUserByName(String username) {
+	public static void registerUser(User user) {
+		
+		Connection conn = DBUtil.getConnection();
+		try {
+			String query = "insert into Users (Username, Password) values (?,?)";
+			PreparedStatement preparedStatement = conn.prepareStatement( query );
+			preparedStatement.setString(1, user.getUserName());
+			preparedStatement.setString(2, user.getPassword());
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// Will return the User object if the user exists and password was correct, otherwise returns null
+	public static User validateUser(User userToValidate) {
+		if(doesUserExist(userToValidate.userName)) {
+			User actualUser = getUserByName(userToValidate.userName);
+			if(userToValidate.password.equals(actualUser.password)) {
+				return actualUser;
+			}
+		}
+		
+		return null;
+	}
+	
+	private static Boolean doesUserExist(String username) {
+		if(getUserByName(username) == null){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	
+	private static User getUserByName(String username) {
 		Connection conn = DBUtil.getConnection();
 		try {
 			String query = "select * from Users where Username=?";
@@ -56,90 +92,4 @@ public class User {
 		}
 		return null;	
 	}
-	
-	public static Boolean doesUserExist(String username) {
-		if(getUserByName(username) == null){
-			return false;
-		}
-		else{
-			return true;
-		}
-	}
-	
-	public static void registerUser(User user) {
-		
-		Connection conn = DBUtil.getConnection();
-		try {
-			String query = "insert into Users (Username, Password) values (?,?)";
-			PreparedStatement preparedStatement = conn.prepareStatement( query );
-			preparedStatement.setString(1, user.getUserName());
-			preparedStatement.setString(2, user.getPassword());
-			preparedStatement.executeUpdate();
-			preparedStatement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
-		/*Properties p = new Properties();
-		FileInputStream fis = null;
-		
-		try {
-			fis = new FileInputStream(propFilePath);
-			p.load(fis);
-			p.setProperty(aUser.getUserName(), aUser.getPassword());
-			p.store(new FileOutputStream(propFilePath), null);
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if(fis!=null) {
-				try {
-					fis.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}*/
-	}
-	
-	public static Boolean validateUser(User aUser, String propFilePath) {
-		
-		Properties p = new Properties();
-		FileInputStream fis = null;
-		
-		String realPassword = null;
-		
-		try {
-			fis = new FileInputStream(propFilePath);
-			p.load(fis);
-			if(!p.containsKey(aUser.userName)) {
-				return false;
-			}
-			realPassword = p.getProperty(aUser.userName);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if(fis!=null) {
-				try {
-					fis.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		if(realPassword.equals(aUser.password))
-			return true;
-		else
-			return false;
-	}
-	
-	// removeUser
-	
-	
 }
