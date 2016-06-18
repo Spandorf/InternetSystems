@@ -4,11 +4,12 @@
 
 <t:layout>
 	<jsp:useBean id="user" scope="session" type="model.User" />
-	<h1>Hello <jsp:getProperty name="user" property="Username" />!</h1>
+	<h1>Hello <jsp:getProperty name="user" property="username" />!</h1>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			Apartment Search Results
 		</div>
+		<jsp:useBean id="searchResults" scope="session" type="model.ApartmentList" />
 		<table class="table">
 	       <thead>
 	           <tr>

@@ -42,7 +42,7 @@
 	    	</div>
 	    	<div class="panel-footer clearfix">
 	    		<input class="btn btn-default pull-left" type="reset" value="Reset" />
-	    		<a class="btn btn-primary pull-right" href="ApartmentSearchResults.jsp"> Search </a>
+	    		<input class="btn btn-primary pull-right" type=submit value="Search" />
 	    	</div>
     	</div>
     </form>

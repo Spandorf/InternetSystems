@@ -29,4 +29,12 @@
     <servlet-name>Register</servlet-name>
     <url-pattern>/Register</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>ApartmentSearch</servlet-name>
+  	<servlet-class>servlet.ApartmentSearch</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ApartmentSearch</servlet-name>
+  	<url-pattern>/ApartmentSearch</url-pattern>
+  </servlet-mapping>
 </web-app>

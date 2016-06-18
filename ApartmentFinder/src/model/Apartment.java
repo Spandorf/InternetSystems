@@ -1,7 +1,7 @@
 package model;
 
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Apartment {
 	private int Id;
@@ -23,6 +23,28 @@ public class Apartment {
 	private ArrayList<Amenity> Amenities;
 	private ArrayList<CommunityFeature> CommunityFeatures;
 	private ArrayList<Review> Reviews;
+	
+	public Apartment(int id, String landlord, String aptNumber, String aptType, String address, String city,
+			String state, String area, String bathrooms, double pricePerMonth, double applicationFee,
+			double damageDeposit, String description, int availability, Date availableDate, int agentId) {
+		super();
+		Id = id;
+		Landlord = landlord;
+		AptNumber = aptNumber;
+		AptType = aptType;
+		Address = address;
+		City = city;
+		State = state;
+		Area = area;
+		Bathrooms = bathrooms;
+		PricePerMonth = pricePerMonth;
+		ApplicationFee = applicationFee;
+		DamageDeposit = damageDeposit;
+		Description = description;
+		Availability = availability;
+		AvailableDate = availableDate;
+		AgentId = agentId;
+	}
 	
 	public Apartment(int id, String landlord, String aptNumber, String aptType, String address, String city,
 			String state, String area, String bathrooms, double pricePerMonth, double applicationFee,

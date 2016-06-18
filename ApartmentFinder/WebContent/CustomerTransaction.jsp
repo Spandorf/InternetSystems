@@ -4,7 +4,7 @@
 
 <t:layout>
 	<jsp:useBean id="user" scope="session" type="model.User" />
-	<h1>Hello <jsp:getProperty name="user" property="Username" />!</h1>
+	<h1>Hello <jsp:getProperty name="user" property="username" />!</h1>
 	<div class="col-sm-6">
 		<div class="col-sm-12">
 			<div class="panel panel-default">
