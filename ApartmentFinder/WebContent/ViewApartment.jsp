@@ -3,6 +3,8 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <t:layout>
+	<jsp:useBean id="user" scope="session" type="model.User" />
+	<h1>Hello <jsp:getProperty name="user" property="userName" />!</h1>
 	<form method="post" action="CustomerTransaction.jsp">
 		<div class="panel panel-default">
 			<div class="panel-heading">

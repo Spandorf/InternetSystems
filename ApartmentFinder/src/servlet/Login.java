@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.User;
 import util.DBUtil;
@@ -41,6 +42,9 @@ public class Login extends HttpServlet {
 		User actualUser = User.validateUser(userToValidate);
 		
 		if(actualUser != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("user", actualUser);
+			
 			response.sendRedirect("CustomerHome.jsp");
 		} else {
 			response.sendRedirect("Register.jsp");
