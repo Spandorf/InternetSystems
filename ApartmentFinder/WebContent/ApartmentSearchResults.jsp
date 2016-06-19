@@ -10,47 +10,36 @@
 			Apartment Search Results
 		</div>
 		<jsp:useBean id="searchResults" scope="session" type="model.ApartmentList" />
-		<table class="table">
-	       <thead>
-	           <tr>
-	               <th>Landlord</th>
-	               <th>Address</th>
-	               <th>Apartment Type</th>
-	               <th>Area of Apartment</th>
-	               <th>Company rating</th>
-	               <th>Price per month</th>
-	               <th>Amenities</th>
-	               <th></th>
-	           </tr>
-	       </thead>
-	       <tbody>
-	           <tr>
-	               <td>John Doe</td>
-	               <td>1600 Penn</td>
-	               <td>Studio</td>
-	               <td>1600 sq. ft.</td>
-	               <td>4/5</td>
-	               <td>1000</td>
-	               <td>AC, Cable, Fireplace</td>
-	               <td>
-	               		<a class="btn btn-primary pull-right" href="ViewApartment.jsp">View/Apply</a>
-	               </td>
-	           </tr>
-	           <tr>
-	               <td>Jane Bae</td>
-	               <td>3111 F St.</td>
-	               <td>2 BD</td>
-	               <td>1000 sq. ft.</td>
-	               <td>3/5</td>
-	               <td>750</td>
-	               <td>AC, Cable, Fireplace</td>
-	               <td>
-	               		<a class="btn btn-primary pull-right" href="ViewApartment.jsp">View/Apply</a>
-	               </td>
-	           </tr>
-	       </tbody>
-	   </table>
+		<form action=ViewApartment>
+			<input type="hidden" name="id" value="1" />
+			<table class="table">
+				<thead>
+				    <tr>
+				        <th>Landlord</th>
+				        <th>Address</th>
+				        <th>Apartment Type</th>
+				        <th>Area of Apartment</th>
+				        <th>Company rating</th>
+				        <th>Price per month</th>
+				        <th>Amenities</th>
+				        <th></th>
+				    </tr>
+				</thead>
+				<tbody>
+				    <tr>
+				        <td>John Doe</td>
+				        <td>1600 Penn</td>
+				        <td>Studio</td>
+				        <td>1600 sq. ft.</td>
+				        <td>4/5</td>
+				        <td>1000</td>
+				        <td>AC, Cable, Fireplace</td>
+				        <td>
+				        	<input type="submit" class="btn btn-primary pull-right" value="View/Apply" />
+				        </td>
+				    </tr>
+				</tbody>
+		   </table>
+		</form>
 	</div>
-
-
 </t:layout>

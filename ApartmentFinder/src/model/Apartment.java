@@ -1,7 +1,13 @@
 package model;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import util.DBUtil;
 
 public class Apartment {
 	private int Id;
@@ -185,6 +191,43 @@ public class Apartment {
 	}
 	public void setReviews(ArrayList<Review> reviews) {
 		Reviews = reviews;
+	}
+	
+	public static Apartment getApartment(int apartmentId) {
+		Apartment apartment = null;
+		Connection conn = DBUtil.getConnection();
+		try {
+			String query = "select * from Apartments where Apartments.Id = ?";
+			PreparedStatement preparedStatement = conn.prepareStatement(query);
+			preparedStatement.setInt(1, apartmentId);
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			rs.next();
+			int id = rs.getInt("Id");
+			String landlord = rs.getString("Landlord");
+			String aptNumber = rs.getString("AptNumber");
+			String aptType = rs.getString("AptType");
+			String address = rs.getString("Address");
+			String city = rs.getString("City");
+			String state = rs.getString("State");
+			String area = rs.getString("Area");
+			String bathrooms = rs.getString("Bathrooms");
+			double pricePerMonth = rs.getDouble("PricePerMonth");
+			double applicationFee = rs.getDouble("ApplicationFee");
+			double damageDeposit = rs.getDouble("DamageDeposit");
+			String description = rs.getString("Description");
+			int availability = rs.getInt("Availability");
+			Date availabilityDate = rs.getDate("AvailableDate");
+			int agentId = rs.getInt("AgentId");
+			
+			apartment = new Apartment(id, landlord, aptNumber, aptType, address, city, state, 
+												area, bathrooms, pricePerMonth, applicationFee, damageDeposit,
+												description,  availability, availabilityDate, agentId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return apartment;
 	}
 
 }

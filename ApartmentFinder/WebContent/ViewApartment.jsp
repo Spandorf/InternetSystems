@@ -7,23 +7,24 @@
 	<h1>Hello <jsp:getProperty name="user" property="username" />!</h1>
 	<form method="post" action="CustomerTransaction.jsp">
 		<div class="panel panel-default">
+			<jsp:useBean id="apartment" scope="session" type="model.Apartment" />
 			<div class="panel-heading">
-				1600 Penn
+				<jsp:getProperty name="apartment" property="address" />
 			</div>
 			<div class="panel-body">
 				<dl class="dl-horizontal">
 					<dt>Address</dt>
-					<dd>1600 Penn</dd>
+					<dd><jsp:getProperty name="apartment" property="address"/></dd>
 					<dt>Apartment Number</dt>
-					<dd>13</dd>
+					<dd><jsp:getProperty name="apartment" property="aptNumber"/></dd>
 					<dt>Apartment Type</dt>
-					<dd>Studio</dd>
+					<dd><jsp:getProperty name="apartment" property="aptType"/></dd>
 					<dt>Area of Apartment</dt>
-					<dd>1600 sq. ft.</dd>
+					<dd><jsp:getProperty name="apartment" property="area"/></dd>
 					<dt>Amenities</dt>
-					<dd>AC, Cable, Dishwasher, Fireplace</dd>
+					<dd>TODO</dd>
 					<dt>Community Features</dt>
-					<dd>Club House, Utilities included, Pool, Garage</dd>
+					<dd>TODO</dd>
 					<dt>Location</dt>
 					<dd><input class="form-control" type="text" name="location" value="" /></dd>
 				</dl>

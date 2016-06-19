@@ -39,7 +39,7 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="Welcome.jsp">Logout</a>
+							<a href="Logout">Logout</a>
 						</li>
 					</ul>
 				</div>

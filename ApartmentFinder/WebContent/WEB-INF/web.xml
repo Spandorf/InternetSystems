@@ -30,11 +30,31 @@
     <url-pattern>/Register</url-pattern>
   </servlet-mapping>
   <servlet>
-  	<servlet-name>ApartmentSearch</servlet-name>
-  	<servlet-class>servlet.ApartmentSearch</servlet-class>
+    <servlet-name>ApartmentSearch</servlet-name>
+    <servlet-class>servlet.ApartmentSearch</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>ApartmentSearch</servlet-name>
-  	<url-pattern>/ApartmentSearch</url-pattern>
+    <servlet-name>ApartmentSearch</servlet-name>
+    <url-pattern>/ApartmentSearch</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ViewApartment</display-name>
+    <servlet-name>ViewApartment</servlet-name>
+    <servlet-class>servlet.ViewApartment</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewApartment</servlet-name>
+    <url-pattern>/ViewApartment</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Logout</display-name>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>servlet.Logout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
 </web-app>
