@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Apartment;
-import model.ApartmentList;
 import model.ApartmentQuery;
 import model.User;
 
@@ -37,26 +37,24 @@ public class ApartmentSearch extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// parse request parameters
 		Date moveInDate = null;
-		double priceRangeLow = 0;
-		double priceRangeHigh = 1000000000; // default really high in case they don't provide a high range
-		String location = null;
-		String apartmentType = null;
-		
 		try {
-			java.util.Date utilDate = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse("move_in_date");
+			java.util.Date utilDate = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(request.getParameter("move_in_date"));
 			moveInDate = new Date(utilDate.getTime());
-			priceRangeLow = Double.parseDouble(request.getParameter("price_range_low"));
-			priceRangeHigh = Double.parseDouble(request.getParameter("price_range_high"));
-			location = request.getParameter("location");
-			apartmentType = request.getParameter("apartment_type");
-		} catch (Exception e) {
-			// TODO: handle parse exception
+		} catch(Exception e) {
+			// TODO: handle date parse exception
 		}
+		double priceRangeLow = Double.parseDouble(request.getParameter("price_range_low"));
+		double priceRangeHigh = Double.parseDouble(request.getParameter("price_range_high"));
+		String location = request.getParameter("location");
+		String apartmentType = request.getParameter("apartment_type");
 		
+		// query for apartments
 		ApartmentQuery query = new ApartmentQuery(moveInDate, priceRangeLow, priceRangeHigh, location, apartmentType);
-		ApartmentList searchResults = ApartmentQuery.FindApartments(query);
+		ArrayList<Apartment> searchResults = ApartmentQuery.FindApartments(query);
 		
+		// put results in the session and forward to search results jsp page
 		HttpSession session = request.getSession();
 		session.setAttribute("searchResults", searchResults);
 	    RequestDispatcher dispatcher = request.getRequestDispatcher("ApartmentSearchResults.jsp");

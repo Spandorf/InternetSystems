@@ -58,18 +58,20 @@ public class ApartmentQuery {
 	}
 	
 	
-	public static ApartmentList FindApartments(ApartmentQuery queryData) {
+	public static ArrayList<Apartment> FindApartments(ApartmentQuery queryData) {
 		ArrayList<Apartment> apartments = new ArrayList<Apartment>();
 		Connection conn = DBUtil.getConnection();
 		try {
-			String query = "select * from Apartments where PricePerMonth > ? and " + 
-						   "PricePerMonth < ? and " + 
-						   "ApartmentType = ?";
+			//String query = "select * from Apartments where PricePerMonth > ? and " + 
+						   //"PricePerMonth < ? and " + 
+						   //"AptType = ?";
+			
+			String query = "select * from Apartments";
 			
 			PreparedStatement preparedStatement = conn.prepareStatement( query );
-			preparedStatement.setDouble(1, queryData.PriceRangeLow);
-			preparedStatement.setDouble(2, queryData.PriceRangeHigh);
-			preparedStatement.setString(3, queryData.ApartmentType);
+			//preparedStatement.setDouble(1, queryData.PriceRangeLow);
+			//preparedStatement.setDouble(2, queryData.PriceRangeHigh);
+			//preparedStatement.setString(3, queryData.ApartmentType);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
 				int id = rs.getInt("Id");
@@ -86,7 +88,7 @@ public class ApartmentQuery {
 				double damageDeposit = rs.getDouble("DamageDeposit");
 				String description = rs.getString("Description");
 				int availability = rs.getInt("Availability");
-				Date availabilityDate = rs.getDate("AvailabilityDate");
+				Date availabilityDate = rs.getDate("AvailableDate");
 				int agentId = rs.getInt("AgentId");
 				
 				Apartment apartment = new Apartment(id, landlord, aptNumber, aptType, address, city, state, 
@@ -169,7 +171,7 @@ public class ApartmentQuery {
 			e.printStackTrace();
 		}
 		
-		return new ApartmentList(apartments);
+		return apartments;
 	}
 }
 

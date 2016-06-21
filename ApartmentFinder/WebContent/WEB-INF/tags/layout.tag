@@ -45,6 +45,9 @@
 				</div>
 			</div>
 		</nav>
+		
+		<!-- Include library for JSTL tags -->
+		<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 
 		<div id="bodyContent">
 			<jsp:doBody />	

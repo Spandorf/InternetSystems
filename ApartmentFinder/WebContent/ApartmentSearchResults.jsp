@@ -2,14 +2,12 @@
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<t:layout>
-	<jsp:useBean id="user" scope="session" type="model.User" />
-	<h1>Hello <jsp:getProperty name="user" property="username" />!</h1>
+<t:layout><jsp:useBean id="user" scope="session" type="model.User" />
+	<h1>Hello, ${user.username}!</h1>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			Apartment Search Results
 		</div>
-		<jsp:useBean id="searchResults" scope="session" type="model.ApartmentList" />
 		<form action=ViewApartment>
 			<input type="hidden" name="id" value="1" />
 			<table class="table">
@@ -26,7 +24,18 @@
 				    </tr>
 				</thead>
 				<tbody>
-				    <tr>
+					<c:forEach var="apt" items="${searchResults}">
+						<tr>
+							<td>${apt.landlord}</td>
+							<td>${apt.address}</td>
+							<td>${apt.aptType}</td>
+							<td>${apt.area}</td>
+							<td>TODO</td>
+							<td>${apt.pricePerMonth}</td>
+							<td>TODO</td>
+						</tr>
+					</c:forEach>
+				    <!--<tr>
 				        <td>John Doe</td>
 				        <td>1600 Penn</td>
 				        <td>Studio</td>
@@ -37,7 +46,7 @@
 				        <td>
 				        	<input type="submit" class="btn btn-primary pull-right" value="View/Apply" />
 				        </td>
-				    </tr>
+				    </tr>-->
 				</tbody>
 		   </table>
 		</form>

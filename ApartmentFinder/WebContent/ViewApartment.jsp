@@ -3,8 +3,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <t:layout>
-	<jsp:useBean id="user" scope="session" type="model.User" />
-	<h1>Hello <jsp:getProperty name="user" property="username" />!</h1>
+	<h1>Hello, ${user.username}!</h1>
 	<form method="post" action="CustomerTransaction.jsp">
 		<div class="panel panel-default">
 			<jsp:useBean id="apartment" scope="session" type="model.Apartment" />
@@ -14,13 +13,13 @@
 			<div class="panel-body">
 				<dl class="dl-horizontal">
 					<dt>Address</dt>
-					<dd><jsp:getProperty name="apartment" property="address"/></dd>
+					<dd>${apartment.address}</dd>
 					<dt>Apartment Number</dt>
-					<dd><jsp:getProperty name="apartment" property="aptNumber"/></dd>
+					<dd>${apartment.aptNumber}</dd>
 					<dt>Apartment Type</dt>
-					<dd><jsp:getProperty name="apartment" property="aptType"/></dd>
+					<dd>${apartment.aptType}</dd>
 					<dt>Area of Apartment</dt>
-					<dd><jsp:getProperty name="apartment" property="area"/></dd>
+					<dd>${apartment.area}</dd>
 					<dt>Amenities</dt>
 					<dd>TODO</dd>
 					<dt>Community Features</dt>

@@ -8,8 +8,7 @@
 <script type="text/javascript">   
 	$(function() {$( "#move_in_date" ).datepicker();}); 
 </script>
-	<jsp:useBean id="user" scope="session" type="model.User" />
-	<h1>Hello <jsp:getProperty name="user" property="username" />!</h1>
+	<h1>Hello, ${user.username}!</h1>
     <form method="post" action="ApartmentSearch">
     	<div class="panel panel-default marginLeft marginRight">
 	    	<div class="panel-heading">
