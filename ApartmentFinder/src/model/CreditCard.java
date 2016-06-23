@@ -73,4 +73,67 @@ public class CreditCard {
 	public void setExpirationDate(Date expirationDate) {
 		ExpirationDate = expirationDate;
 	}
+	
+	public static int getBalance(int ccId) {
+		int balance = null;
+		Connection conn = DBUtil.getConnection();
+		try {
+			String query = "select * from CreditCards where CreditCards.Id = ?";
+			PreparedStatement preparedStatement = conn.prepareStatement(query);
+			preparedStatement.setInt(1, ccId);
+			ResultSet rs = preparedStatement.executeQuery();
+			rs.next();
+			double dbBalance = rs.getDouble("Balance");
+			balance = dbBalance;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return balance;
+	}
+	
+	public static void updateBalance(int ccId, double balance) {
+		int balance = null;
+		Connection conn = DBUtil.getConnection();
+		try {
+			String query = "update CreditCards set Balance=? where CreditCards.Id = ?";
+			PreparedStatement preparedStatement = conn.prepareStatement(query);
+			preparedStatement.setInt(1, balance);
+			preparedStatement.setInt(2, ccId);
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static boolean validateCC(CreditCard cc) {
+		boolean valid = false;
+		Connection conn = DBUtil.getConnection();
+		try {
+			String query = "select * from CreditCards where CreditCards.Id = ?";
+			PreparedStatement preparedStatement = conn.prepareStatement(query);
+			preparedStatement.setInt(1, cc.getId());
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			rs.next();
+			string ccName = rs.getString("CardholderName");
+			string ccNum = rs.getString("CreditCardNumber");
+			string ccType = rs.getString("CardType");
+			string ccCVV = rs.getString("CVV");
+			Date ccExp = rs.getDate("ExpirationDate");
+			if(cc.getCardholderName.equals(ccName) &&
+					cc.getCreditCardNumber.equals(ccNum) && 
+					cc.getCardType.equals(ccType) &&
+					cc.getCVV.equals(ccCVV) &&
+					cc.getExpirationDate.equals(ccExp))
+			{
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return balance;
+	}
 }

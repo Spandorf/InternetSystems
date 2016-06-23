@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import model.Apartment;
 
 public class Application {
 	private int Id;
@@ -98,5 +99,73 @@ public class Application {
 		AgentId = agentId;
 	}
 	
+	public static Apartment getApp(int appId) {
+		Application app = null;
+		Connection conn = DBUtil.getConnection();
+		try {
+			String query = "select * from Applications where Applications.Id = ?";
+			PreparedStatement preparedStatement = conn.prepareStatement(query);
+			preparedStatement.setInt(1, apartmentId);
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			rs.next();
+			int id = rs.getInt("Id");
+			String aptId = rs.getInt("ApartmentId");
+			String status = rs.getInt("Status");
+			String appNum = rs.getString("ApplicationNumber");
+			Date applyingDate = rs.getDate("ApplyingDate");
+			String applicantId = rs.getInt("ApplicantId");
+			Date moveInDate = rs.getDate("MoveInDate");
+			int leaseTerm = rs.getInt("LeaseTerm");
+			double cost = rs.getDouble("Cost");
+			String notes = rs.getString("Notes");
+			int agentId = rs.getInt("AgentId");
+			
+			Apartment apartment = Apartment.getApartment(aptId);
+			
+			app = new Application(id, apartment, status, appNum, applyingDate,
+					applicantId, moveInDate, leaseTerm, cost, notes, agentId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return app;
+	}
 	
+	public static void addApplication(Application app) {
+		
+		Connection conn = DBUtil.getConnection();
+		try {
+			String query = "insert into Applications (ApartmentId, Status, ApplicationNumber, ApplyingDate, ApplicantId, MoveInDate, LeaseTerm, Cost, Notes, AgentId ) values (?,?,?,?,?,?,?,?,?,?)";
+			PreparedStatement preparedStatement = conn.prepareStatement(query);
+			preparedStatement.setString(1, app.getId());
+			preparedStatement.setString(2, app.getStatus());
+			preparedStatement.setString(3, app.getApplicationNumber);
+			preparedStatement.setString(4, app.getApplyingDate());
+			preparedStatement.setString(5, app.getApplicantId());
+			preparedStatement.setString(6, app.getMoveInDate());
+			preparedStatement.setString(7, app.getLeaseTerm());
+			preparedStatement.setString(8, app.getCost());
+			preparedStatement.setString(9, app.getNotes());
+			preparedStatement.setString(10, app.getAgentId());
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void cancelApplication(Application app) {
+		
+		Connection conn = DBUtil.getConnection();
+		try {
+			String query = "delete from Applications where Id=?";
+			PreparedStatement preparedStatement = conn.prepareStatement(query);
+			preparedStatement.setString(1, app.getId());
+			preparedStatement.executeUpdate();
+			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
