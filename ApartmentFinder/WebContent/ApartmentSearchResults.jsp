@@ -8,23 +8,32 @@
 		<div class="panel-heading">
 			Apartment Search Results
 		</div>
-		<form action=ViewApartment>
-			<input type="hidden" name="id" value="1" />
-			<table class="table">
-				<thead>
-				    <tr>
-				        <th>Landlord</th>
-				        <th>Address</th>
-				        <th>Apartment Type</th>
-				        <th>Area of Apartment</th>
-				        <th>Company rating</th>
-				        <th>Price per month</th>
-				        <th>Amenities</th>
-				        <th></th>
-				    </tr>
-				</thead>
-				<tbody>
-					<c:forEach var="apt" items="${searchResults}">
+		
+		<!-- Include library for JSTL tags -->
+		<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+		
+		<!-- Table for column headings. -->
+		<table class="table">
+			<thead>
+			    <tr>
+			        <th>Landlord</th>
+			        <th>Address</th>
+			        <th>Apartment Type</th>
+			        <th>Area of Apartment</th>
+			        <th>Company rating</th>
+			        <th>Price per month</th>
+			        <th>Amenities</th>
+			        <th></th>
+			    </tr>
+			</thead>
+		</table>
+		
+		<!-- Since we can't put forms in a table, define a table for each row. It will look like one table anyway. -->
+		<c:forEach var="apt" items="${searchResults}">
+			<form action=ViewApartment>
+				<input type="hidden" name="id" value="${apt.id}" />
+				<table class="table">
+					<tbody>
 						<tr>
 							<td>${apt.landlord}</td>
 							<td>${apt.address}</td>
@@ -33,22 +42,13 @@
 							<td>TODO</td>
 							<td>${apt.pricePerMonth}</td>
 							<td>TODO</td>
+							<td class="clearfix">
+								<input type="submit" class="btn btn-primary pull-right" value="View/Apply" />
+							</td>
 						</tr>
-					</c:forEach>
-				    <!--<tr>
-				        <td>John Doe</td>
-				        <td>1600 Penn</td>
-				        <td>Studio</td>
-				        <td>1600 sq. ft.</td>
-				        <td>4/5</td>
-				        <td>1000</td>
-				        <td>AC, Cable, Fireplace</td>
-				        <td>
-				        	<input type="submit" class="btn btn-primary pull-right" value="View/Apply" />
-				        </td>
-				    </tr>-->
-				</tbody>
-		   </table>
-		</form>
+					</tbody>
+			   </table>
+			</form>
+		</c:forEach>
 	</div>
 </t:layout>

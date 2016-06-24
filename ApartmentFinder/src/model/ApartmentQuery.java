@@ -105,7 +105,7 @@ public class ApartmentQuery {
 				ArrayList<Amenity> amenities = new ArrayList<Amenity>();
 				
 				query = "select * from ApartmentAmenities " + 
-						"join Amenities on ApartmentAmenities.AmenityId = Amenities.Id" +
+						"join Amenities on ApartmentAmenities.Id = Amenities.Id" +
 						"where ApartmentAmenities.ApartmentId = ?";
 				preparedStatement = conn.prepareStatement(query);
 				preparedStatement.setInt(1, apt.getId());
