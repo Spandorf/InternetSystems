@@ -1,5 +1,7 @@
 package model;
 
+import model.CreditCard;
+
 public class TransactionInfo {
 	private Apartment apartment;
 	private Application application;

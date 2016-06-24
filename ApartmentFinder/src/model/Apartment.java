@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.Amenity;
+import model.CommunityFeature;
+import model.Reviews;
 
 import util.DBUtil;
 
@@ -220,9 +223,16 @@ public class Apartment {
 			Date availabilityDate = rs.getDate("AvailableDate");
 			int agentId = rs.getInt("AgentId");
 			
+			preparedStatement.close();
+			
+			ArrayList<Amenity> amenities = Amenity.getAmenities(apartmentId);
+			ArrayList<CommunityFeature> commFeatures = CommunityFeature.getCommunityFeatures(apartmentId);
+			ArrayList<Review> reviews = Review.getReviews(apartmentId);
+			
 			apartment = new Apartment(id, landlord, aptNumber, aptType, address, city, state, 
 												area, bathrooms, pricePerMonth, applicationFee, damageDeposit,
-												description,  availability, availabilityDate, agentId);
+												description,  availability, availabilityDate, agentId, amenities,
+												commFeatures, reviews);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

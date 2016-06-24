@@ -56,4 +56,32 @@ public class Review {
 	public void setApartmentId(int apartmentId) {
 		ApartmentId = apartmentId;
 	}
+	
+	public static ArrayList<Review> getReviews(int apartmentId) {
+		ArrayList<Review> reviews = new ArrayList<Review>();
+		Connection conn = DBUtil.getConnection();
+		try {
+			String query = "SELECT * from Reviews WHERE Reviews.ApartmentId = ?";
+			PreparedStatement preparedStatement = conn.prepareStatement(query);
+			preparedStatement.setInt(1, apartmentId);
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while(rs.next()){
+				Review review = null;
+				int id = rs.getInt("Id");
+				String name = rs.getString("ReviewerName");
+				Date date = rs.getDate("ReviewDate");
+				int rating = rs.getRating("Rating");
+				String review = rs.getReview("Review");
+				review = new Review(id, name, description, date, rating, review, apartmentId);
+				reviews.add(review);
+			}
+			preparedStatement.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return reviews;
+	}
 }
