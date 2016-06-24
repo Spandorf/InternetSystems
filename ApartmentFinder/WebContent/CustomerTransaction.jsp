@@ -13,19 +13,19 @@
 				<div class="panel-body">
 					<dl class="dl-horizontal">
 						<dt>Landlord</dt>
-						<dd>John Doe</dd>
+						<dd>${transaction.apartment.landlord}</dd>
 						<dt>Address</dt>
-						<dd>1600 Penn</dd>
+						<dd>${transaction.apartment.address}</dd>
 						<dt>Apartment Type</dt>
-						<dd>Studio</dd>
+						<dd>${transaction.apartment.aptType}</dd>
 						<dt>Area of Apartment</dt>
-						<dd>1600 sq. ft.</dd>
+						<dd>${transaction.apartment.area}</dd>
 						<dt>Company rating</dt>
-						<dd>4/5</dd>
+						<dd>TODO</dd>
 						<dt>Price per month</dt>
-						<dd>1000</dd>
+						<dd>${transaction.apartment.pricePerMonth}</dd>
 						<dt>Amenities</dt>
-						<dd>AC, Cable, Fireplace</dd>
+						<dd>TODO</dd>
 					</dl>
 				</div>
 			</div>
@@ -38,11 +38,11 @@
 				<div class="panel-body">
 					<dl class="dl-horizontal">
 						<dt>Application Fee</dt>
-						<dd>$30000</dd>
+						<dd>${transaction.apartment.applicationFee}</dd>
 						<dt>Pet Deposit</dt>
-						<dd>$50</dd>
+						<dd>TODO</dd>
 						<dt>Total</dt>
-						<dd>$3000</dd>
+						<dd>${transaction.application.cost}</dd>
 					</dl>
 				</div>
 			</div>

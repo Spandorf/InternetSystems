@@ -5,6 +5,8 @@
 <t:layout>
 	<h1>Hello, ${user.username}!</h1>
 	<form method="post" action="CustomerTransaction.jsp">
+		<input type="hidden" name="id" value="${apartment.id}" />
+		
 		<div class="panel panel-default">
 			<jsp:useBean id="apartment" scope="session" type="model.Apartment" />
 			<div class="panel-heading">
@@ -24,8 +26,13 @@
 					<dd>TODO</dd>
 					<dt>Community Features</dt>
 					<dd>TODO</dd>
-					<dt>Location</dt>
-					<dd><input class="form-control" type="text" name="location" value="" /></dd>
+					<dt>Lease Term (Months)</dt>
+					<dd>
+						<select name="leaseTerm">
+							<option value="6">6 Months</option>
+							<option value="12">12 Months</option>
+						</select>
+					</dd>
 				</dl>
 			</div>
 			<div class="panel-footer clearfix">

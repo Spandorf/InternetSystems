@@ -57,4 +57,14 @@
     <servlet-name>Logout</servlet-name>
     <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ViewAndApply</display-name>
+    <servlet-name>ViewAndApply</servlet-name>
+    <servlet-class>servlet.ViewAndApply</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewAndApply</servlet-name>
+    <url-pattern>/ViewAndApply</url-pattern>
+  </servlet-mapping>
 </web-app>
