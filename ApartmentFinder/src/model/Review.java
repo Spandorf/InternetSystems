@@ -1,6 +1,13 @@
 package model;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import util.DBUtil;
 
 public class Review {
 	private int Id;
@@ -71,9 +78,9 @@ public class Review {
 				int id = rs.getInt("Id");
 				String name = rs.getString("ReviewerName");
 				Date date = rs.getDate("ReviewDate");
-				int rating = rs.getRating("Rating");
-				String review = rs.getReview("Review");
-				review = new Review(id, name, description, date, rating, review, apartmentId);
+				int rating = rs.getInt("Rating");
+				String reviewText = rs.getString("Review");
+				review = new Review(id, name, date, rating, reviewText, apartmentId);
 				reviews.add(review);
 			}
 			preparedStatement.close();

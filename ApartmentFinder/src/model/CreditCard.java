@@ -1,6 +1,12 @@
 package model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
+
+import util.DBUtil;
 
 public class CreditCard {
 	private int Id;
@@ -74,8 +80,8 @@ public class CreditCard {
 		ExpirationDate = expirationDate;
 	}
 	
-	public static int getBalance(int ccId) {
-		int balance = null;
+	public static double getBalance(int ccId) {
+		double balance = 0;
 		Connection conn = DBUtil.getConnection();
 		try {
 			String query = "select * from CreditCards where CreditCards.Id = ?";
@@ -93,12 +99,11 @@ public class CreditCard {
 	}
 	
 	public static void updateBalance(int ccId, double balance) {
-		int balance = null;
 		Connection conn = DBUtil.getConnection();
 		try {
 			String query = "update CreditCards set Balance=? where CreditCards.Id = ?";
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
-			preparedStatement.setInt(1, balance);
+			preparedStatement.setDouble(1, balance);
 			preparedStatement.setInt(2, ccId);
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
@@ -108,7 +113,7 @@ public class CreditCard {
 	}
 	
 	public static boolean validateCC(CreditCard cc) {
-		boolean valid = false;
+		boolean isValid = false;
 		Connection conn = DBUtil.getConnection();
 		try {
 			String query = "select * from CreditCards where CreditCards.Id = ?";
@@ -117,23 +122,23 @@ public class CreditCard {
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			rs.next();
-			string ccName = rs.getString("CardholderName");
-			string ccNum = rs.getString("CreditCardNumber");
-			string ccType = rs.getString("CardType");
-			string ccCVV = rs.getString("CVV");
+			String ccName = rs.getString("CardholderName");
+			String ccNum = rs.getString("CreditCardNumber");
+			String ccType = rs.getString("CardType");
+			String ccCVV = rs.getString("CVV");
 			Date ccExp = rs.getDate("ExpirationDate");
-			if(cc.getCardholderName.equals(ccName) &&
-					cc.getCreditCardNumber.equals(ccNum) && 
-					cc.getCardType.equals(ccType) &&
-					cc.getCVV.equals(ccCVV) &&
-					cc.getExpirationDate.equals(ccExp))
+			if(cc.getCardholderName().equals(ccName) &&
+					cc.getCreditCardNumber().equals(ccNum) && 
+					cc.getCardType().equals(ccType) &&
+					cc.getCVV().equals(ccCVV) &&
+					cc.getExpirationDate().equals(ccExp))
 			{
-				return true;
+				isValid = true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return balance;
+		return isValid;
 	}
 }

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Amenity;
 import model.CommunityFeature;
-import model.Reviews;
+import model.Review;
 
 import util.DBUtil;
 
