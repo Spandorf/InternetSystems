@@ -25,3 +25,11 @@ dd {
 #cancelAppBtn {
 	margin-left: 5px;
 }
+
+#aptSearchResultsContainer td {
+	width: 10%;
+}
+
+#aptSearchResultsContainer th {
+	width: 10%;
+}

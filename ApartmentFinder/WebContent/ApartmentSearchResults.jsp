@@ -4,7 +4,7 @@
 
 <t:layout><jsp:useBean id="user" scope="session" type="model.User" />
 	<h1>Hello, ${user.username}!</h1>
-	<div class="panel panel-default">
+	<div id="aptSearchResultsContainer" class="panel panel-default">
 		<div class="panel-heading">
 			Apartment Search Results
 		</div>
@@ -19,8 +19,9 @@
 			        <th>Landlord</th>
 			        <th>Address</th>
 			        <th>Apartment Type</th>
-			        <th>Area of Apartment</th>
-			        <th>Company rating</th>
+			        <th>Bathrooms</th>
+			        <th>Area</th>
+			        <th>Rating</th>
 			        <th>Price per month</th>
 			        <th>Amenities</th>
 			        <th></th>
@@ -38,10 +39,15 @@
 							<td>${apt.landlord}</td>
 							<td>${apt.address}</td>
 							<td>${apt.aptType}</td>
+							<td>${apt.bathrooms}</td>
 							<td>${apt.area}</td>
 							<td>TODO</td>
 							<td>${apt.pricePerMonth}</td>
-							<td>TODO</td>
+							<td>
+								<c:forEach var="ame" items="${apt.amenities}">
+									${ame.name}, 
+								</c:forEach>
+							</td>
 							<td class="clearfix">
 								<input type="submit" class="btn btn-primary pull-right" value="View/Apply" />
 							</td>

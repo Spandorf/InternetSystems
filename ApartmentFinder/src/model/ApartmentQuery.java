@@ -99,17 +99,21 @@ public class ApartmentQuery {
 			}
 			rs.close();
 			preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 			
-			// get amenities for each apartment
+		// get amenities for each apartment
+		try {
 			for(Apartment apt : apartments) {
 				ArrayList<Amenity> amenities = new ArrayList<Amenity>();
 				
-				query = "select * from ApartmentAmenities " + 
-						"join Amenities on ApartmentAmenities.Id = Amenities.Id" +
+				String query = "select * from ApartmentAmenities " + 
+						"join Amenities on ApartmentAmenities.AmenityId = Amenities.Id " +
 						"where ApartmentAmenities.ApartmentId = ?";
-				preparedStatement = conn.prepareStatement(query);
+				PreparedStatement preparedStatement = conn.prepareStatement(query);
 				preparedStatement.setInt(1, apt.getId());
-				rs = preparedStatement.executeQuery();
+				ResultSet rs = preparedStatement.executeQuery();
 				while(rs.next()) {
 					int id = rs.getInt("Id");
 					String name = rs.getString("Name");
@@ -121,17 +125,21 @@ public class ApartmentQuery {
 				
 				apt.setAmenities(amenities);
 			}
-			
-			// get community features for each apartment
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		// get community features for each apartment
+		try {
 			for(Apartment apt : apartments) {
 				ArrayList<CommunityFeature> commFeatures = new ArrayList<CommunityFeature>();
 				
-				query = "select * from ApartmentCommunityFeatures " + 
-						"join CommunityFeatures on ApartmentCommunityFeatures.CommunityFeatureId = CommunityFeatures.Id" +
-						"where ApartmentCommunityFeatures.ApartmentId = ?";
-				preparedStatement = conn.prepareStatement(query);
+				String query = "select * from ApartmentCommunityFeatures " + 
+							   "join CommunityFeatures on ApartmentCommunityFeatures.CommunityFeatureId = CommunityFeatures.Id " +
+							   "where ApartmentCommunityFeatures.ApartmentId = ?";
+				PreparedStatement preparedStatement = conn.prepareStatement(query);
 				preparedStatement.setInt(1, apt.getId());
-				rs = preparedStatement.executeQuery();
+				ResultSet rs = preparedStatement.executeQuery();
 				while(rs.next()) {
 					int id = rs.getInt("Id");
 					String name = rs.getString("Name");
@@ -143,16 +151,20 @@ public class ApartmentQuery {
 				
 				apt.setCommunityFeatures(commFeatures);
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 			
-			// get reviews for each apartment
+		// get reviews for each apartment
+		try {
 			for(Apartment apt : apartments) {
 				ArrayList<Review> reviews = new ArrayList<Review>();
 				
-				query = "select * from Reviews " + 
+				String query = "select * from Reviews " + 
 						"where Reviews.ApartmentId = ?";
-				preparedStatement = conn.prepareStatement(query);
+				PreparedStatement preparedStatement = conn.prepareStatement(query);
 				preparedStatement.setInt(1, apt.getId());
-				rs = preparedStatement.executeQuery();
+				ResultSet rs = preparedStatement.executeQuery();
 				while(rs.next()) {
 					int id = rs.getInt("Id");
 					String reviewerName = rs.getString("ReviewerName");

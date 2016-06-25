@@ -17,7 +17,7 @@
 			</dd>
 			<dt>Password:</dt>
 			<dd>
-				<input class="form-control" type="text" name="password" value="" />
+				<input class="form-control" type="password" name="password" value="" />
 			</dd>
 		</dl>	
 	<!-- Navigation links --> 
