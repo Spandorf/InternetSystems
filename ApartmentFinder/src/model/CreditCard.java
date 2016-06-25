@@ -1,10 +1,10 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 
 import util.DBUtil;
 
@@ -112,8 +112,16 @@ public class CreditCard {
 		}
 	}
 	
-	public static boolean validateCC(CreditCard cc) {
-		boolean isValid = false;
+	public static int getCreditCardIdByNumber(String creditCardNumber) {
+		//TODO
+	}
+	
+	/*
+	 * If validation is unsuccessful, returns an error message.
+	 * If successful, returns null.
+	 */
+	public static String validateCC(CreditCard cc, double appCost) {
+		String errorMessage = null;
 		Connection conn = DBUtil.getConnection();
 		try {
 			String query = "select * from CreditCards where CreditCards.Id = ?";
@@ -127,18 +135,23 @@ public class CreditCard {
 			String ccType = rs.getString("CardType");
 			String ccCVV = rs.getString("CVV");
 			Date ccExp = rs.getDate("ExpirationDate");
-			if(cc.getCardholderName().equals(ccName) &&
-					cc.getCreditCardNumber().equals(ccNum) && 
-					cc.getCardType().equals(ccType) &&
-					cc.getCVV().equals(ccCVV) &&
-					cc.getExpirationDate().equals(ccExp))
+			double ccBalance = rs.getDouble("Balance");
+			
+			if(!cc.getCardholderName().equals(ccName) ||
+					!cc.getCreditCardNumber().equals(ccNum) ||
+					!cc.getCardType().equals(ccType) ||
+					!cc.getCVV().equals(ccCVV) ||
+					!cc.getExpirationDate().equals(ccExp))
 			{
-				isValid = true;
+				errorMessage = "Incorrect details.";
+			} else if(ccBalance < appCost) {
+				errorMessage = "Insufficient funds.";
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return isValid;
+		return errorMessage;
 	}
 }

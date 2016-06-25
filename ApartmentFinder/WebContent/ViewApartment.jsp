@@ -4,7 +4,7 @@
 
 <t:layout>
 	<h1>Hello, ${user.username}!</h1>
-	<form method="post" action="CustomerTransaction.jsp">
+	<form method="post" action="Apply">
 		<input type="hidden" name="id" value="${apartment.id}" />
 		
 		<div class="panel panel-default">

@@ -49,7 +49,8 @@
 		</div>
 	</div>
 	<div class="col-sm-6">
-		<form method="post" action="TransactionConfirmation.jsp">
+		<form method="post" action="CustomerTransactionConfirmation">
+			<input name="cost" type="hidden" value="${transaction.application.cost}" />
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Payment Info

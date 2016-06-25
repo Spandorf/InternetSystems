@@ -14,13 +14,13 @@ import model.TransactionInfo;
 /**
  * Servlet implementation class ViewAndApply
  */
-public class ViewAndApply extends HttpServlet {
+public class Apply extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewAndApply() {
+    public Apply() {
         super();
     }
 
