@@ -25,6 +25,7 @@ public class Apartment {
 	private double PricePerMonth;
 	private double ApplicationFee;
 	private double DamageDeposit;
+	private double Rating;
 	private String Description;
 	private int Availability;
 	private Date AvailableDate;
@@ -35,7 +36,7 @@ public class Apartment {
 	
 	public Apartment(int id, String landlord, String aptNumber, String aptType, String address, String city,
 			String state, String area, String bathrooms, double pricePerMonth, double applicationFee,
-			double damageDeposit, String description, int availability, Date availableDate, int agentId) {
+			double damageDeposit, double rating, String description, int availability, Date availableDate, int agentId) {
 		super();
 		Id = id;
 		Landlord = landlord;
@@ -49,6 +50,7 @@ public class Apartment {
 		PricePerMonth = pricePerMonth;
 		ApplicationFee = applicationFee;
 		DamageDeposit = damageDeposit;
+		Rating = rating;
 		Description = description;
 		Availability = availability;
 		AvailableDate = availableDate;
@@ -57,7 +59,7 @@ public class Apartment {
 	
 	public Apartment(int id, String landlord, String aptNumber, String aptType, String address, String city,
 			String state, String area, String bathrooms, double pricePerMonth, double applicationFee,
-			double damageDeposit, String description, int availability, Date availableDate, int agentId,
+			double damageDeposit, double rating, String description, int availability, Date availableDate, int agentId,
 			ArrayList<Amenity> amenities, ArrayList<CommunityFeature> communityFeatures, ArrayList<Review> reviews) {
 		super();
 		Id = id;
@@ -72,6 +74,7 @@ public class Apartment {
 		PricePerMonth = pricePerMonth;
 		ApplicationFee = applicationFee;
 		DamageDeposit = damageDeposit;
+		Rating = rating;
 		Description = description;
 		Availability = availability;
 		AvailableDate = availableDate;
@@ -153,6 +156,12 @@ public class Apartment {
 	public void setDamageDeposit(double damageDeposit) {
 		DamageDeposit = damageDeposit;
 	}
+	public double getRating() {
+		return Rating;
+	}
+	public void setRating(double rating) {
+		Rating = rating;
+	}
 	public String getDescription() {
 		return Description;
 	}
@@ -229,8 +238,19 @@ public class Apartment {
 			ArrayList<CommunityFeature> commFeatures = CommunityFeature.getCommunityFeatures(apartmentId);
 			ArrayList<Review> reviews = Review.getReviews(apartmentId);
 			
+			double rating = 0;
+			double totRating = 0;
+			double numRating = 0;
+			for(Review review : reviews){
+			    totRating += review.getRating();
+			    numRating++;
+			}
+			if(numRating > 0){
+				rating = totRating / numRating;
+			}
+			
 			apartment = new Apartment(id, landlord, aptNumber, aptType, address, city, state, 
-												area, bathrooms, pricePerMonth, applicationFee, damageDeposit,
+												area, bathrooms, pricePerMonth, applicationFee, damageDeposit, rating,
 												description,  availability, availabilityDate, agentId, amenities,
 												commFeatures, reviews);
 		} catch (SQLException e) {

@@ -43,7 +43,7 @@ public class Amenity {
 		ArrayList<Amenity> amenities = new ArrayList<Amenity>();
 		Connection conn = DBUtil.getConnection();
 		try {
-			String query = "SELECT Amenities.Id AS Id, Amenities.Name AS Name, Amenities.Description AS Description from ApartmentAmenities JOIN Amenities ON ApartmentAmenities.AmenityId = Amenities.Id WHERE ApartmentAmenities.ApartmentId = ? AND ApartmentAmenities.Availablility = 1";
+			String query = "SELECT Amenities.Id AS Id, Amenities.Name AS Name, Amenities.Description AS Description from ApartmentAmenities JOIN Amenities ON ApartmentAmenities.AmenityId = Amenities.Id WHERE ApartmentAmenities.ApartmentId = ? AND ApartmentAmenities.Availability = 1";
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			preparedStatement.setInt(1, apartmentId);
 			ResultSet rs = preparedStatement.executeQuery();

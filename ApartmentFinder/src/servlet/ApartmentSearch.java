@@ -45,8 +45,18 @@ public class ApartmentSearch extends HttpServlet {
 		} catch(Exception e) {
 			// TODO: handle date parse exception
 		}
-		double priceRangeLow = Double.parseDouble(request.getParameter("price_range_low"));
-		double priceRangeHigh = Double.parseDouble(request.getParameter("price_range_high"));
+		
+		double priceRangeLow = 0;
+		double priceRangeHigh = 0;
+		String priceLow = request.getParameter("price_range_low");
+		String priceHigh = request.getParameter("price_range_high");
+		if(priceLow != null && !priceLow.isEmpty()){
+			priceRangeLow = Double.parseDouble(priceLow);
+		}
+		if(priceHigh != null && !priceHigh.isEmpty()){
+			priceRangeLow = Double.parseDouble(priceHigh);
+		}
+		
 		String location = request.getParameter("location");
 		String apartmentType = request.getParameter("apartment_type");
 		

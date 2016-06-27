@@ -113,6 +113,7 @@ public class CreditCard {
 	}
 	
 	public static int getCreditCardIdByNumber(String creditCardNumber) {
+		return 0;
 		//TODO
 	}
 	

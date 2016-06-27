@@ -41,7 +41,7 @@
 							<td>${apt.aptType}</td>
 							<td>${apt.bathrooms}</td>
 							<td>${apt.area}</td>
-							<td>TODO</td>
+							<td>${apt.rating}</td>
 							<td>${apt.pricePerMonth}</td>
 							<td>
 								<c:forEach var="ame" items="${apt.amenities}">

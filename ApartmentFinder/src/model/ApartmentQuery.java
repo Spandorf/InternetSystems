@@ -57,21 +57,91 @@ public class ApartmentQuery {
 		ApartmentType = apartmentType;
 	}
 	
+	public boolean hasCriteria(ApartmentQuery queryData){
+		if((queryData.getApartmentType() != null && !queryData.getApartmentType().isEmpty()) || 
+				(queryData.getMoveInDate() != null) ||
+				(queryData.getPriceRangeHigh() != 0)  ||
+				(queryData.getPriceRangeLow() != 0) ||
+				(queryData.getLocation() != null && !queryData.getLocation().isEmpty()) ){
+			return true;
+		}
+		return false;
+	}
 	
 	public static ArrayList<Apartment> FindApartments(ApartmentQuery queryData) {
 		ArrayList<Apartment> apartments = new ArrayList<Apartment>();
 		Connection conn = DBUtil.getConnection();
 		try {
-			//String query = "select * from Apartments where PricePerMonth > ? and " + 
-						   //"PricePerMonth < ? and " + 
-						   //"AptType = ?";
-			
-			String query = "select * from Apartments";
-			
-			PreparedStatement preparedStatement = conn.prepareStatement( query );
-			//preparedStatement.setDouble(1, queryData.PriceRangeLow);
-			//preparedStatement.setDouble(2, queryData.PriceRangeHigh);
-			//preparedStatement.setString(3, queryData.ApartmentType);
+			String query = "select * from Apartments";	
+			boolean setWhere = false;
+			boolean setType = false;
+			boolean setPriceLow = false;
+			boolean setPriceHigh = false;
+			boolean setLocation = false;
+			boolean setDate = false;
+			if(queryData.hasCriteria(queryData)){
+				query = "select * from Apartments WHERE ";
+				if(queryData.getApartmentType() != null && !queryData.getApartmentType().isEmpty()){
+					query += "AptType LIKE ?";
+					setWhere = true;
+					setType = true;
+				}
+				if(queryData.getPriceRangeLow() != 0 || queryData.getPriceRangeHigh() != 0){
+					if(setWhere == true){
+						query += " AND ";
+					}
+					if(queryData.getPriceRangeLow() != 0 && queryData.getPriceRangeHigh() != 0){
+						query += "PricePerMonth >= ? AND PricePerMonth <= ?";
+						setPriceLow = true;
+						setPriceHigh = true;
+					}
+					else if(queryData.getPriceRangeHigh() != 0){
+						query += "PricePerMonth >= 0 AND PricePerMonth <= ?";
+						setPriceHigh = true;
+					}
+					else{
+						query += "PricePerMonth >= ?";
+						setPriceLow = true;
+					}
+				}
+				if(queryData.getLocation() != null && !queryData.getLocation().isEmpty()){
+					if(setWhere == true){
+						query += " AND ";
+					}
+					query += "City LIKE ?";
+					setLocation = true;
+				}
+				if(queryData.getMoveInDate() != null){
+					if(setWhere == true){
+						query += " AND ";
+					}
+					query +="AvailableDate < ?";
+					setDate = true;
+				}
+			}
+			System.out.println(query);
+			PreparedStatement preparedStatement = conn.prepareStatement(query);
+			int queryCount = 1;
+			if(setType){
+				preparedStatement.setString(queryCount, "%" + queryData.getApartmentType() + "%");
+				queryCount++;
+			}
+			if(setPriceLow){
+				preparedStatement.setDouble(queryCount, queryData.getPriceRangeLow());
+				queryCount++;
+			}
+			if(setPriceHigh){
+				preparedStatement.setDouble(queryCount, queryData.getPriceRangeHigh());
+				queryCount++;
+			}
+			if(setLocation){
+				preparedStatement.setString(queryCount, "%" + queryData.getLocation() + "%");
+				queryCount++;
+			}
+			if(setDate){
+				preparedStatement.setDate(queryCount, queryData.getMoveInDate());
+				queryCount++;
+			}
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
 				int id = rs.getInt("Id");
@@ -92,7 +162,7 @@ public class ApartmentQuery {
 				int agentId = rs.getInt("AgentId");
 				
 				Apartment apartment = new Apartment(id, landlord, aptNumber, aptType, address, city, state, 
-													area, bathrooms, pricePerMonth, applicationFee, damageDeposit,
+													area, bathrooms, pricePerMonth, applicationFee, damageDeposit, 0,
 													description,  availability, availabilityDate, agentId);
 				
 				apartments.add(apartment);
@@ -177,6 +247,17 @@ public class ApartmentQuery {
 					reviews.add(review);
 				}
 				
+				double rating = 0;
+				double totRating = 0;
+				double numRating = 0;
+				for(Review review : reviews){
+				    totRating += review.getRating();
+				    numRating++;
+				}
+				if(numRating > 0){
+					rating = totRating / numRating;
+				}
+				apt.setRating(rating);
 				apt.setReviews(reviews);
 			}
 		} catch (SQLException e) {
