@@ -31,6 +31,7 @@ public class User {
 		super();
 		Username = username;
 		Password = password;
+		Id = id;
 	}
 	
 	public User(int id, String firstName, String lastName, String address, String city, String state, String postalCode,

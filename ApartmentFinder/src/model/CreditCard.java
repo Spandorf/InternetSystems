@@ -113,8 +113,23 @@ public class CreditCard {
 	}
 	
 	public static int getCreditCardIdByNumber(String creditCardNumber) {
-		return 0;
-		//TODO
+		int id = 0;
+		Connection conn = DBUtil.getConnection();
+		try {
+			String query = "select * from CreditCards where CreditCards.CreditCardNumber LIKE ?";
+			PreparedStatement preparedStatement = conn.prepareStatement(query);
+			preparedStatement.setString(1, "%" + creditCardNumber + "%");
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			rs.next();
+			id = rs.getInt("Id");
+
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return id;
 	}
 	
 	/*
@@ -135,14 +150,15 @@ public class CreditCard {
 			String ccNum = rs.getString("CreditCardNumber");
 			String ccType = rs.getString("CardType");
 			String ccCVV = rs.getString("CVV");
-			Date ccExp = rs.getDate("ExpirationDate");
+			String ccExp = rs.getString("ExpirationDate");
 			double ccBalance = rs.getDouble("Balance");
 			
+			ccExp +="-11";
 			if(!cc.getCardholderName().equals(ccName) ||
 					!cc.getCreditCardNumber().equals(ccNum) ||
 					!cc.getCardType().equals(ccType) ||
-					!cc.getCVV().equals(ccCVV) ||
-					!cc.getExpirationDate().equals(ccExp))
+					!cc.getCVV().equals(ccCVV) 
+					)
 			{
 				errorMessage = "Incorrect details.";
 			} else if(ccBalance < appCost) {

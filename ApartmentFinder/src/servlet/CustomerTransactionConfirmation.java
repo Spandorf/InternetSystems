@@ -63,7 +63,6 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 			String appNum = apartment.getId() + "-" + numApps;
 			
 			String errorMessage = CreditCard.validateCC(cc, cost);
-			
 			if(errorMessage == null) { // means no error
 				// TODO: associate application to user, reduce balance of cc
 				Application application = new Application(0, apartment, 0, appNum, expirationDate, user.getId(), expirationDate, leaseTerm, cost, "", 1);

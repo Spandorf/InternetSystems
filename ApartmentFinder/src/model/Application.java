@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import model.Apartment;
 import util.DBUtil;
 
@@ -156,6 +158,44 @@ public class Application {
 		return app;
 	}
 	
+	public static ArrayList<Application> getUserApps(int userId) {
+		ArrayList<Application> apps = new ArrayList<Application>();
+		Connection conn = DBUtil.getConnection();
+		try {
+			String query = "select * from Applications where Applications.ApplicantId = ?";
+			PreparedStatement preparedStatement = conn.prepareStatement(query);
+			preparedStatement.setInt(1, userId);
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while(rs.next()){
+				Application app = null;
+				int id = rs.getInt("Id");
+				int aptId = rs.getInt("ApartmentId");
+				int status = rs.getInt("Status");
+				String appNum = rs.getString("ApplicationNumber");
+				Date applyingDate = rs.getDate("ApplyingDate");
+				int applicantId = rs.getInt("ApplicantId");
+				Date moveInDate = rs.getDate("MoveInDate");
+				int leaseTerm = rs.getInt("LeaseTerm");
+				double cost = rs.getDouble("Cost");
+				String notes = rs.getString("Notes");
+				int agentId = rs.getInt("AgentId");
+				Apartment apartment = model.Apartment.getApartment(aptId);
+				
+				app = new Application(id, apartment, status, appNum, applyingDate,
+						applicantId, moveInDate, leaseTerm, cost, notes, agentId);
+				
+				apps.add(app);
+			}
+			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return apps;
+	}
+	
 	public static Application getApp(int appId) {
 		Application app = null;
 		Connection conn = DBUtil.getConnection();
@@ -196,7 +236,7 @@ public class Application {
 			java.sql.Timestamp appDate = new java.sql.Timestamp(new java.util.Date().getTime());
 			String query = "insert into Applications (ApartmentId, Status, ApplicationNumber, ApplyingDate, ApplicantId, MoveInDate, LeaseTerm, Cost, Notes, AgentId ) values (?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
-			preparedStatement.setInt(1, app.getId());
+			preparedStatement.setInt(1, app.getApartment().getId());
 			preparedStatement.setInt(2, app.getStatus());
 			preparedStatement.setString(3, app.getApplicationNumber());
 			preparedStatement.setTimestamp(4, appDate);
