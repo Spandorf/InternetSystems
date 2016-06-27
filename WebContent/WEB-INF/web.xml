@@ -87,4 +87,20 @@
     <servlet-name>CustomerTransactionConfirmation</servlet-name>
     <url-pattern>/CustomerTransactionConfirmation</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>CancelApp</servlet-name>
+  	<servlet-class>servlet.CancelApp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>CancelApp</servlet-name>
+  	<url-pattern>/CancelApp</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>CancelApplication</servlet-name>
+  	<servlet-class>servlet.CancelApplication</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>CancelApplication</servlet-name>
+  	<url-pattern>/CancelApplication</url-pattern>
+  </servlet-mapping>
 </web-app>

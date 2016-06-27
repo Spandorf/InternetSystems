@@ -8,11 +8,8 @@
 	<h1>Hello, ${user.username}!</h1>
 		<form method="post" action="CancelApplication">
 		<input type="hidden" name="id" value="${application.id}" />
-		
 		<div class="panel panel-default">
-			<jsp:useBean id="apartment" scope="session" type="model.Apartment" />
 			<div class="panel-heading">
-				<jsp:getProperty name="apartment" property="address" />
 			</div>
 			<div class="panel-body">
 				<dl class="dl-horizontal">
@@ -47,11 +44,11 @@
 			<div class="panel-body">
 				<dl class="dl-horizontal">
 					<dt>Application Fee</dt>
-					<dd>${application.Cost}</dd>
+					<dd>${application.cost}</dd>
 					<dt>Pet Deposit</dt>
 					<dd>TODO</dd>
 					<dt>Total</dt>
-					<dd>${application.Cost}</dd>
+					<dd>${application.cost}</dd>
 				</dl>
 			</div>
 			</div>

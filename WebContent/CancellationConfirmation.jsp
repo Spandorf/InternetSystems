@@ -1,49 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<!-- Include library for JSTL tags -->
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 
 <t:layout>
 	<h1>Hello, ${user.username}!</h1>
-   <div class="col-sm-6">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				Apartment Info
+				Cancellation Confirmed
 			</div>
 			<div class="panel-body">
 				<dl class="dl-horizontal">
 					<dt>Landlord</dt>
-					<dd>John Doe</dd>
+					<dd>${application.apartment.aptNumber}</dd>
 					<dt>Address</dt>
-					<dd>1600 Penn</dd>
+					<dd>${application.apartment.address}</dd>
 					<dt>Apartment Type</dt>
-					<dd>Studio</dd>
+					<dd>${application.apartment.aptType}</dd>
 					<dt>Area of Apartment</dt>
-					<dd>1600 sq. ft.</dd>
-					<dt>Company rating</dt>
-					<dd>4/5</dd>
-					<dt>Price per month</dt>
-					<dd>1000</dd>
+					<dd>${application.apartment.area}</dd>
+					<dt>Rating</dt>
+					<dd>${application.apartment.rating}</dd>
+					<dt>Price Per Month</dt>
+					<dd>${application.apartment.pricePerMonth}</dd>
 					<dt>Amenities</dt>
-					<dd>AC, Cable, Fireplace</dd>
+					<dd>
+						<c:forEach var="ame" items="${application.apartment.amenities}">
+							${ame.name}, 
+						</c:forEach>
+					</dd>
+					<dt>Community Features</dt>
+					<dd>
+						<c:forEach var="commFeature" items="${application.apartment.communityFeatures}">
+							${commFeature.name}, 
+						</c:forEach>
+					</dd>
 				</dl>
-			</div>
-		</div>
-	</div>
-	<div class="col-sm-6">
-		<div class="panel panel-default">
 			<div class="panel-heading">
 				Cost Summary
 			</div>
 			<div class="panel-body">
 				<dl class="dl-horizontal">
 					<dt>Application Fee</dt>
-					<dd>$30000</dd>
+					<dd>${application.cost}</dd>
 					<dt>Pet Deposit</dt>
-					<dd>$50</dd>
+					<dd>TODO</dd>
 					<dt>Total</dt>
-					<dd>$3000</dd>
+					<dd>${application.cost}</dd>
 				</dl>
 			</div>
+			</div>
 		</div>
-	</div>
 </t:layout>

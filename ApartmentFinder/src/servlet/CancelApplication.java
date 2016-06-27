@@ -35,7 +35,8 @@ public class CancelApplication extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 		if(user != null && !user.getUsername().isEmpty()){
 			session.setAttribute("application", app);
-		    RequestDispatcher dispatcher = request.getRequestDispatcher("CancelApplication.jsp");
+			Application.cancelApplication(app);
+		    RequestDispatcher dispatcher = request.getRequestDispatcher("CancellationConfirmation.jsp");
 		    dispatcher.forward(request, response);
 		}
 		else{

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Apartment;
+import model.CreditCard;
 import util.DBUtil;
 
 public class Application {
@@ -218,6 +219,8 @@ public class Application {
 			String notes = rs.getString("Notes");
 			int agentId = rs.getInt("AgentId");
 			
+			preparedStatement.close();
+			
 			Apartment apartment = model.Apartment.getApartment(aptId);
 			
 			app = new Application(id, apartment, status, appNum, applyingDate,
@@ -262,6 +265,22 @@ public class Application {
 			preparedStatement.setInt(1, app.getId());
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
+			
+			query = "Select * from CreditCards where UserId=?";
+			preparedStatement = conn.prepareStatement(query);
+			preparedStatement.setInt(1, app.getApplicantId());
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			rs.next();
+			int balance = rs.getInt("Balance");
+			int ccId = rs.getInt("Id");
+			
+			preparedStatement.close();
+			
+			double newbalance = app.getCost() + balance;
+			CreditCard.updateBalance(ccId, newbalance);
+			
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
