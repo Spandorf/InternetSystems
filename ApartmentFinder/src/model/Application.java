@@ -104,6 +104,58 @@ public class Application {
 		AgentId = agentId;
 	}
 	
+	public static int getNumApps(int aptId){
+		Connection conn = DBUtil.getConnection();
+		int count = 0;
+		try {
+			String query = "select * from Applications where Applications.ApartmentId = ?";
+			PreparedStatement preparedStatement = conn.prepareStatement(query);
+			preparedStatement.setInt(1, aptId);
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while(rs.next()){
+				count++;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	public static Application getAppByAppNum(String applNum) {
+		Application app = null;
+		Connection conn = DBUtil.getConnection();
+		try {
+			String query = "select * from Applications where Applications.ApplicationNumber LIKE ?";
+			PreparedStatement preparedStatement = conn.prepareStatement(query);
+			preparedStatement.setString(1, "%" + applNum + "%");
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			rs.next();
+			int id = rs.getInt("Id");
+			int aptId = rs.getInt("ApartmentId");
+			int status = rs.getInt("Status");
+			String appNum = rs.getString("ApplicationNumber");
+			Date applyingDate = rs.getDate("ApplyingDate");
+			int applicantId = rs.getInt("ApplicantId");
+			Date moveInDate = rs.getDate("MoveInDate");
+			int leaseTerm = rs.getInt("LeaseTerm");
+			double cost = rs.getDouble("Cost");
+			String notes = rs.getString("Notes");
+			int agentId = rs.getInt("AgentId");
+			
+			Apartment apartment = model.Apartment.getApartment(aptId);
+			
+			app = new Application(id, apartment, status, appNum, applyingDate,
+					applicantId, moveInDate, leaseTerm, cost, notes, agentId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return app;
+	}
+	
 	public static Application getApp(int appId) {
 		Application app = null;
 		Connection conn = DBUtil.getConnection();
@@ -141,14 +193,15 @@ public class Application {
 		
 		Connection conn = DBUtil.getConnection();
 		try {
+			java.sql.Timestamp appDate = new java.sql.Timestamp(new java.util.Date().getTime());
 			String query = "insert into Applications (ApartmentId, Status, ApplicationNumber, ApplyingDate, ApplicantId, MoveInDate, LeaseTerm, Cost, Notes, AgentId ) values (?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			preparedStatement.setInt(1, app.getId());
 			preparedStatement.setInt(2, app.getStatus());
 			preparedStatement.setString(3, app.getApplicationNumber());
-			preparedStatement.setDate(4, app.getApplyingDate());
+			preparedStatement.setTimestamp(4, appDate);
 			preparedStatement.setInt(5, app.getApplicantId());
-			preparedStatement.setDate(6, app.getMoveInDate());
+			preparedStatement.setTimestamp(6, appDate);
 			preparedStatement.setInt(7, app.getLeaseTerm());
 			preparedStatement.setDouble(8, app.getCost());
 			preparedStatement.setString(9, app.getNotes());

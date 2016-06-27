@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<!-- Include library for JSTL tags -->
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 
 <t:layout>
 	<h1>Hello, ${user.username}!</h1>
@@ -21,11 +23,15 @@
 						<dt>Area of Apartment</dt>
 						<dd>${transaction.apartment.area}</dd>
 						<dt>Company rating</dt>
-						<dd>TODO</dd>
+						<dd>${transaction.apartment.rating}</dd>
 						<dt>Price per month</dt>
 						<dd>${transaction.apartment.pricePerMonth}</dd>
 						<dt>Amenities</dt>
-						<dd>TODO</dd>
+						<dd>
+							<c:forEach var="ame" items="${transaction.apartment.amenities}">
+								${ame.name}, 
+							</c:forEach>
+						</dd>
 					</dl>
 				</div>
 			</div>
@@ -51,6 +57,8 @@
 	<div class="col-sm-6">
 		<form method="post" action="CustomerTransactionConfirmation">
 			<input name="cost" type="hidden" value="${transaction.application.cost}" />
+			<input name="aptId" type="hidden" value="${transaction.apartment.id}" />
+			<input name="leaseTerm" type="hidden" value="${transaction.application.leaseTerm}" />
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Payment Info

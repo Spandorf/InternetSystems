@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+	<!-- Include library for JSTL tags -->
+	<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 
 <t:layout>
 	<h1>Hello, ${user.username}!</h1>
@@ -23,9 +25,17 @@
 					<dt>Area of Apartment</dt>
 					<dd>${apartment.area}</dd>
 					<dt>Amenities</dt>
-					<dd>TODO</dd>
+					<dd>
+						<c:forEach var="ame" items="${apartment.amenities}">
+							${ame.name}, 
+						</c:forEach>
+					</dd>
 					<dt>Community Features</dt>
-					<dd>TODO</dd>
+					<dd>
+						<c:forEach var="commFeature" items="${apartment.communityFeatures}">
+							${commFeature.name}, 
+						</c:forEach>
+					</dd>
 					<dt>Lease Term (Months)</dt>
 					<dd>
 						<select name="leaseTerm">

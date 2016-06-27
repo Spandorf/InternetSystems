@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Apartment;
+import model.User;
 
 /**
  * Servlet implementation class ViewApartment
@@ -33,9 +34,15 @@ public class ViewApartment extends HttpServlet {
 		Apartment apartment = Apartment.getApartment(apartmentId);
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("apartment", apartment);
-	    RequestDispatcher dispatcher = request.getRequestDispatcher("ViewApartment.jsp");
-	    dispatcher.forward(request, response);
+		User user = (User) session.getAttribute("user");
+		if(user != null && !user.getUsername().isEmpty()){
+			session.setAttribute("apartment", apartment);
+		    RequestDispatcher dispatcher = request.getRequestDispatcher("ViewApartment.jsp");
+		    dispatcher.forward(request, response);
+		}
+		else{
+			response.sendRedirect("Welcome.jsp");
+		}
 	}
 
 	/**

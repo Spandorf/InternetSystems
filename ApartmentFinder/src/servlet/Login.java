@@ -37,7 +37,7 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
-		User userToValidate = new User(userName, password);
+		User userToValidate = new User(0, userName, password);
 		
 		User actualUser = User.validateUser(userToValidate);
 		

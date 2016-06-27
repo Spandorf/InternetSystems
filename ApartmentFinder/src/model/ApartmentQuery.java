@@ -119,7 +119,7 @@ public class ApartmentQuery {
 					setDate = true;
 				}
 			}
-			System.out.println(query);
+			//System.out.println(query);
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			int queryCount = 1;
 			if(setType){

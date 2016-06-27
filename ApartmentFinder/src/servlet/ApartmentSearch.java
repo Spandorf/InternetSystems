@@ -66,9 +66,15 @@ public class ApartmentSearch extends HttpServlet {
 		
 		// put results in the session and forward to search results jsp page
 		HttpSession session = request.getSession();
-		session.setAttribute("searchResults", searchResults);
-	    RequestDispatcher dispatcher = request.getRequestDispatcher("ApartmentSearchResults.jsp");
-	    dispatcher.forward(request, response);
+		User user = (User) session.getAttribute("user");
+		if(user != null && !user.getUsername().isEmpty()){
+			session.setAttribute("searchResults", searchResults);
+		    RequestDispatcher dispatcher = request.getRequestDispatcher("ApartmentSearchResults.jsp");
+		    dispatcher.forward(request, response);
+		}
+		else{
+			response.sendRedirect("Welcome.jsp");
+		}
 	}
 
 	/**

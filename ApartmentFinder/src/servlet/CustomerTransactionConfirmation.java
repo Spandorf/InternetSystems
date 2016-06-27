@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -13,7 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.CreditCard;
+import model.TransactionInfo;
 import model.User;
+import model.Apartment;
+import model.Application;
 
 /**
  * Servlet implementation class CustomerTransactionConfirmation
@@ -38,6 +42,7 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 		String creditCardNumber = request.getParameter("card_number");
 		String cardType = request.getParameter("card_type");
 		String cvv = request.getParameter("sec_code");
+		int leaseTerm = Integer.parseInt(request.getParameter("leaseTerm"));
 		Date expirationDate = null;
 		try {
 			java.util.Date utilDate = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(request.getParameter("exp_date"));
@@ -48,21 +53,35 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		
-		int id = CreditCard.getCreditCardIdByNumber(creditCardNumber);
-		
-		CreditCard cc = new CreditCard(id, cardholderName, creditCardNumber, 0, cardType, user.getId(), cvv, expirationDate);
-	
-		String errorMessage = CreditCard.validateCC(cc, cost);
-		
-		if(errorMessage == null) { // means no error
-			// TODO: associate application to user, reduce balance of cc
-		} else {
-			session.setAttribute("errorMessage", errorMessage);
+		if(user != null && !user.getUsername().isEmpty()){
+			
+			int id = CreditCard.getCreditCardIdByNumber(creditCardNumber);
+			CreditCard cc = new CreditCard(id, cardholderName, creditCardNumber, 0, cardType, user.getId(), cvv, expirationDate);
+
+			Apartment apartment = Apartment.getApartment(Integer.parseInt(request.getParameter("aptId")));
+			int numApps = Application.getNumApps(apartment.getId()) + 1;
+			String appNum = apartment.getId() + "-" + numApps;
+			
+			String errorMessage = CreditCard.validateCC(cc, cost);
+			
+			if(errorMessage == null) { // means no error
+				// TODO: associate application to user, reduce balance of cc
+				Application application = new Application(0, apartment, 0, appNum, expirationDate, user.getId(), expirationDate, leaseTerm, cost, "", 1);
+				Application.addApplication(application);
+				Application completedApp = Application.getAppByAppNum(appNum);
+				TransactionInfo transInfo = new TransactionInfo(apartment, completedApp);
+				session.setAttribute("transaction", transInfo);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("TransactionConfirmation.jsp");
+				dispatcher.forward(request, response);
+			} else {
+				session.setAttribute("errorMessage", errorMessage);
+			}
+			
 		}
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("TransactionConfirmation.jsp");
-		dispatcher.forward(request, response);
+		else{
+			response.sendRedirect("Welcome.jsp");
+		}
+
 	}
 
 	/**

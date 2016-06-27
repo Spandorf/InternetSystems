@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.TransactionInfo;
+import model.User;
 
 /**
  * Servlet implementation class ViewAndApply
@@ -34,9 +35,15 @@ public class Apply extends HttpServlet {
 		TransactionInfo transaction = TransactionInfo.getTransactionInfo(aptId, leaseTerm);
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("transaction", transaction);
-	    RequestDispatcher dispatcher = request.getRequestDispatcher("CustomerTransaction.jsp");
-	    dispatcher.forward(request, response);
+		User user = (User) session.getAttribute("user");
+		if(user != null && !user.getUsername().isEmpty()){
+			session.setAttribute("transaction", transaction);
+		    RequestDispatcher dispatcher = request.getRequestDispatcher("CustomerTransaction.jsp");
+		    dispatcher.forward(request, response);
+		}
+		else{
+			response.sendRedirect("Welcome.jsp");
+		}
 	}
 
 	/**

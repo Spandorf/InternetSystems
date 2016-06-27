@@ -1,6 +1,7 @@
 package model;
 
 import model.CreditCard;
+import model.Apartment;
 
 public class TransactionInfo {
 	private Apartment apartment;
@@ -26,8 +27,10 @@ public class TransactionInfo {
 	}
 	
 	public static TransactionInfo getTransactionInfo(int apartmentId, int leaseTerm) {
-		// TODO
-		
-		return null;
+		Apartment apartment = Apartment.getApartment(apartmentId);
+		double cost = apartment.getApplicationFee();
+		Application application = new Application(0, apartment, 0, null, null, 0, null, leaseTerm, cost, null, 1);
+		TransactionInfo transInfo = new TransactionInfo(apartment, application);
+		return transInfo;
 	}
 }

@@ -36,7 +36,7 @@ public class Register extends HttpServlet {
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		
-		User user = new User(userName, password);
+		User user = new User(0, userName, password);
 		User.registerUser(user);
 		response.sendRedirect("Welcome.jsp");
 	}

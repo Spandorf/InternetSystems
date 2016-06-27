@@ -27,7 +27,7 @@ public class User {
 	private ArrayList<Application> Applications;
 	private ArrayList<CreditCard> CreditCards;
 	
-	public User(String username, String password) {
+	public User(int id, String username, String password) {
 		super();
 		Username = username;
 		Password = password;
@@ -204,7 +204,7 @@ public class User {
 			preparedStatement.setString(1, username);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while( resultSet.next() ) {
-				User user = new User(resultSet.getString("Username"), resultSet.getString("Password"));
+				User user = new User(resultSet.getInt("Id"), resultSet.getString("Username"), resultSet.getString("Password"));
 				return user;
 			}
 			resultSet.close();
