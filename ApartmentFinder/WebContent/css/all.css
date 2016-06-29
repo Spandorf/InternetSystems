@@ -1,0 +1,35 @@
+@CHARSET "ISO-8859-1";
+
+.price-range {
+	width: 100px;
+	display : inline;
+}
+
+.searchfield {
+	padding-bottom: 5px;
+}
+
+#bodyContent {
+	width: 1000px;
+	margin: auto;
+}
+
+dd {
+	margin-bottom: 10px;
+}
+
+#cancelPaymentBtn {
+	margin-left: 5px;
+}
+
+#cancelAppBtn {
+	margin-left: 5px;
+}
+
+#aptSearchResultsContainer td {
+	width: 10%;
+}
+
+#aptSearchResultsContainer th {
+	width: 10%;
+}
