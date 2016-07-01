@@ -54,7 +54,7 @@ public class ApartmentSearch extends HttpServlet {
 			priceRangeLow = Double.parseDouble(priceLow);
 		}
 		if(priceHigh != null && !priceHigh.isEmpty()){
-			priceRangeLow = Double.parseDouble(priceHigh);
+			priceRangeHigh = Double.parseDouble(priceHigh);
 		}
 		
 		String location = request.getParameter("location");
