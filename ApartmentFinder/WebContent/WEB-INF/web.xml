@@ -88,6 +88,13 @@
     <url-pattern>/CustomerTransactionConfirmation</url-pattern>
   </servlet-mapping>
   <servlet>
+  	<servlet-name>ViewApplication</servlet-name>
+  	<servlet-class>servlet.ViewApplication</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ViewApplication</servlet-name>
+  	<url-pattern>/ViewApplication</url-pattern>
+  </servlet-mapping><servlet>
   	<servlet-name>CancelApplication</servlet-name>
   	<servlet-class>servlet.CancelApplication</servlet-class>
   </servlet>
@@ -95,4 +102,5 @@
   	<servlet-name>CancelApplication</servlet-name>
   	<url-pattern>/CancelApplication</url-pattern>
   </servlet-mapping>
+  
 </web-app>

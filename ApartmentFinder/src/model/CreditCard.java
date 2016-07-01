@@ -154,14 +154,19 @@ public class CreditCard {
 			double ccBalance = rs.getDouble("Balance");
 			
 			ccExp +="-11";
-			if(!cc.getCardholderName().equals(ccName) ||
-					!cc.getCreditCardNumber().equals(ccNum) ||
-					!cc.getCardType().equals(ccType) ||
-					!cc.getCVV().equals(ccCVV) 
-					)
-			{
-				errorMessage = "Incorrect details.";
-			} else if(ccBalance < appCost) {
+			if(!cc.getCardholderName().equals(ccName)){
+				errorMessage = "Incorrect cardholder.";
+			}
+			else if(!cc.getCreditCardNumber().equals(ccNum)){
+				errorMessage = "Incorrect card number.";
+			}
+			else if(!cc.getCardType().equals(ccType)){
+				errorMessage = "Incorrect type.";
+			}		
+			else if(!cc.getCVV().equals(ccCVV)){
+				errorMessage = "Incorrect ccv.";
+			}	
+			else if(ccBalance < appCost) {
 				errorMessage = "Insufficient funds.";
 			}
 			
