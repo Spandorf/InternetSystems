@@ -26,7 +26,7 @@
 		</table>
 		<!-- Since we can't put forms in a table, define a table for each row. It will look like one table anyway. -->
 		<c:forEach var="app" items="${applications}">
-			<form action=CancelApp>
+			<form action=CancelApplication>
 				<input type="hidden" name="id" value="${app.id}" />
 				<table class="table">
 					<tbody>
