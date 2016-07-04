@@ -24,19 +24,19 @@ public class CommunityFeature {
 		return Id;
 	}
 	public void setId(int id) {
-		Id = id;
+		this.Id = id;
 	}
 	public String getName() {
 		return Name;
 	}
 	public void setName(String name) {
-		Name = name;
+		this.Name = name;
 	}
 	public String getDescription() {
 		return Description;
 	}
 	public void setDescription(String description) {
-		Description = description;
+		this.Description = description;
 	}
 	
 	public static ArrayList<CommunityFeature> getCommunityFeatures(int apartmentId) {

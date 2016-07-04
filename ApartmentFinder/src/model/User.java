@@ -61,103 +61,103 @@ public class User {
 		return Id;
 	}
 	public void setId(int id) {
-		Id = id;
+		this.Id = id;
 	}
 	public String getFirstName() {
 		return FirstName;
 	}
 	public void setFirstName(String firstName) {
-		FirstName = firstName;
+		this.FirstName = firstName;
 	}
 	public String getLastName() {
 		return LastName;
 	}
 	public void setLastName(String lastName) {
-		LastName = lastName;
+		this.LastName = lastName;
 	}
 	public String getAddress() {
 		return Address;
 	}
 	public void setAddress(String address) {
-		Address = address;
+		this.Address = address;
 	}
 	public String getCity() {
 		return City;
 	}
 	public void setCity(String city) {
-		City = city;
+		this.City = city;
 	}
 	public String getState() {
 		return State;
 	}
 	public void setState(String state) {
-		State = state;
+		this.State = state;
 	}
 	public String getPostalCode() {
 		return PostalCode;
 	}
 	public void setPostalCode(String postalCode) {
-		PostalCode = postalCode;
+		this.PostalCode = postalCode;
 	}
 	public String getEmailAddress() {
 		return EmailAddress;
 	}
 	public void setEmailAddress(String emailAddress) {
-		EmailAddress = emailAddress;
+		this.EmailAddress = emailAddress;
 	}
 	public String getPhoneNumber() {
 		return PhoneNumber;
 	}
 	public void setPhoneNumber(String phoneNumber) {
-		PhoneNumber = phoneNumber;
+		this.PhoneNumber = phoneNumber;
 	}
 	public String getBirthday() {
 		return Birthday;
 	}
 	public void setBirthday(String birthday) {
-		Birthday = birthday;
+		this.Birthday = birthday;
 	}
 	public int getType() {
 		return Type;
 	}
 	public void setType(int type) {
-		Type = type;
+		this.Type = type;
 	}
 	public int getStatus() {
 		return Status;
 	}
 	public void setStatus(int status) {
-		Status = status;
+		this.Status = status;
 	}
 	public int getNumbOfVisits() {
 		return NumbOfVisits;
 	}
 	public void setNumbOfVisits(int numbOfVisits) {
-		NumbOfVisits = numbOfVisits;
+		this.NumbOfVisits = numbOfVisits;
 	}
 	public String getUsername() {
 		return Username;
 	}
 	public void setUsername(String username) {
-		Username = username;
+		this.Username = username;
 	}
 	public String getPassword() {
 		return Password;
 	}
 	public void setPassword(String password) {
-		Password = password;
+		this.Password = password;
 	}
 	public ArrayList<Application> getApplications() {
 		return Applications;
 	}
 	public void setApplications(ArrayList<Application> applications) {
-		Applications = applications;
+		this.Applications = applications;
 	}
 	public ArrayList<CreditCard> getCreditCards() {
 		return CreditCards;
 	}
 	public void setCreditCards(ArrayList<CreditCard> creditCards) {
-		CreditCards = creditCards;
+		this.CreditCards = creditCards;
 	}
 	
 	public static void registerUser(User user) {

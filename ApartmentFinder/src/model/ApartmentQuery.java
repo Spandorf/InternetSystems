@@ -30,31 +30,31 @@ public class ApartmentQuery {
 		return MoveInDate;
 	}
 	public void setMoveInDate(Date moveInDate) {
-		MoveInDate = moveInDate;
+		this.MoveInDate = moveInDate;
 	}
 	public double getPriceRangeLow() {
 		return PriceRangeLow;
 	}
 	public void setPriceRangeLow(double priceRangeLow) {
-		PriceRangeLow = priceRangeLow;
+		this.PriceRangeLow = priceRangeLow;
 	}
 	public double getPriceRangeHigh() {
 		return PriceRangeHigh;
 	}
 	public void setPriceRangeHigh(double priceRangeHigh) {
-		PriceRangeHigh = priceRangeHigh;
+		this.PriceRangeHigh = priceRangeHigh;
 	}
 	public String getLocation() {
 		return Location;
 	}
 	public void setLocation(String location) {
-		Location = location;
+		this.Location = location;
 	}
 	public String getApartmentType() {
 		return ApartmentType;
 	}
 	public void setApartmentType(String apartmentType) {
-		ApartmentType = apartmentType;
+		this.ApartmentType = apartmentType;
 	}
 	
 	public boolean hasCriteria(ApartmentQuery queryData){

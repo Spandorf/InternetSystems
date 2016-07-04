@@ -22,12 +22,12 @@ public class CartItem {
 		AptId = aptId;
 	}
 	
-	public int getId() {
+	public int getCartItemId() {
 		return CartItemId;
 	}
 	
-	public void setId(int cartItemId) {
-		CartItemId = cartItemId;
+	public void setCartItemId(int cartItemId) {
+		this.CartItemId = cartItemId;
 	}
 	
 	public int getLeaseTerm() {
@@ -35,7 +35,7 @@ public class CartItem {
 	}
 	
 	public void setLeaseTerm(int leaseTerm) {
-		LeaseTerm = leaseTerm;
+		this.LeaseTerm = leaseTerm;
 	}
 	
 	public int getAptId() {
@@ -43,15 +43,15 @@ public class CartItem {
 	}
 	
 	public void setAptId(int aptId) {
-		AptId = aptId;
+		this.AptId = aptId;
 	}
 	
-	public Apartment getApt() {
+	public Apartment getApartment() {
 		return Apartment;
 	}
 	
-	public void setApt(Apartment apt) {
-		Apartment = apt;
+	public void setApartment(Apartment apartment) {
+		this.Apartment = apartment;
 	}
 	
 }

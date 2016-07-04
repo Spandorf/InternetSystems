@@ -62,49 +62,49 @@ public class Application {
 		return ApplicationNumber;
 	}
 	public void setApplicationNumber(String applicationNumber) {
-		ApplicationNumber = applicationNumber;
+		this.ApplicationNumber = applicationNumber;
 	}
 	public Date getApplyingDate() {
 		return ApplyingDate;
 	}
 	public void setApplyingDate(Date applyingDate) {
-		ApplyingDate = applyingDate;
+		this.ApplyingDate = applyingDate;
 	}
 	public int getApplicantId() {
 		return ApplicantId;
 	}
 	public void setApplicantId(int applicantId) {
-		ApplicantId = applicantId;
+		this.ApplicantId = applicantId;
 	}
 	public Date getMoveInDate() {
 		return MoveInDate;
 	}
 	public void setMoveInDate(Date moveInDate) {
-		MoveInDate = moveInDate;
+		this.MoveInDate = moveInDate;
 	}
 	public int getLeaseTerm() {
 		return LeaseTerm;
 	}
 	public void setLeaseTerm(int leaseTerm) {
-		LeaseTerm = leaseTerm;
+		this.LeaseTerm = leaseTerm;
 	}
 	public double getCost() {
 		return Cost;
 	}
 	public void setCost(double cost) {
-		Cost = cost;
+		this.Cost = cost;
 	}
 	public String getNotes() {
 		return Notes;
 	}
 	public void setNotes(String notes) {
-		Notes = notes;
+		this.Notes = notes;
 	}
 	public int getAgentId() {
 		return AgentId;
 	}
 	public void setAgentId(int agentId) {
-		AgentId = agentId;
+		this.AgentId = agentId;
 	}
 	
 	public static int getNumApps(int aptId){

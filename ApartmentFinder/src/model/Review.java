@@ -31,37 +31,37 @@ public class Review {
 		return Id;
 	}
 	public void setId(int id) {
-		Id = id;
+		this.Id = id;
 	}
 	public String getReviewerName() {
 		return ReviewerName;
 	}
 	public void setReviewerName(String reviewerName) {
-		ReviewerName = reviewerName;
+		this.ReviewerName = reviewerName;
 	}
 	public Date getReviewDate() {
 		return ReviewDate;
 	}
 	public void setReviewDate(Date reviewDate) {
-		ReviewDate = reviewDate;
+		this.ReviewDate = reviewDate;
 	}
 	public int getRating() {
 		return Rating;
 	}
 	public void setRating(int rating) {
-		Rating = rating;
+		this.Rating = rating;
 	}
 	public String getReview() {
 		return Review;
 	}
 	public void setReview(String review) {
-		Review = review;
+		this.Review = review;
 	}
 	public int getApartmentId() {
 		return ApartmentId;
 	}
 	public void setApartmentId(int apartmentId) {
-		ApartmentId = apartmentId;
+		this.ApartmentId = apartmentId;
 	}
 	
 	public static ArrayList<Review> getReviews(int apartmentId) {

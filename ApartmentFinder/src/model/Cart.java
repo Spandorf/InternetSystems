@@ -31,20 +31,20 @@ public class Cart {
 		return CartId;
 	}
 	public void setId(int cartId) {
-		CartId = cartId;
+		this.CartId = cartId;
 	}
 	public int getUser() {
 		return UserId;
 	}
 	public void setName(int userId) {
-		UserId = userId;
+		this.UserId = userId;
 	}
 	public ArrayList<Integer> getItems() {
 		return CartItems;
 	}
 	
 	public void setItems(ArrayList<Integer> items) {
-		CartItems = items;
+		this.CartItems = items;
 	}
 	
 	public static ArrayList<CartItem> getCartItemsById(int cartId) {
@@ -75,7 +75,7 @@ public class Cart {
 		try {
 			for(CartItem item: items){
 				Apartment apartment = Apartment.getApartment(item.getAptId());
-				item.setApt(apartment);
+				item.setApartment(apartment);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

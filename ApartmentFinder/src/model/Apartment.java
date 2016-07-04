@@ -88,121 +88,121 @@ public class Apartment {
 		return Id;
 	}
 	public void setId(int id) {
-		Id = id;
+		this.Id = id;
 	}
 	public String getLandlord() {
 		return Landlord;
 	}
 	public void setLandlord(String landlord) {
-		Landlord = landlord;
+		this.Landlord = landlord;
 	}
 	public String getAptNumber() {
 		return AptNumber;
 	}
 	public void setAptNumber(String aptNumber) {
-		AptNumber = aptNumber;
+		this.AptNumber = aptNumber;
 	}
 	public String getAptType() {
 		return AptType;
 	}
 	public void setAptType(String aptType) {
-		AptType = aptType;
+		this.AptType = aptType;
 	}
 	public String getAddress() {
 		return Address;
 	}
 	public void setAddress(String address) {
-		Address = address;
+		this.Address = address;
 	}
 	public String getCity() {
 		return City;
 	}
 	public void setCity(String city) {
-		City = city;
+		this.City = city;
 	}
 	public String getState() {
 		return State;
 	}
 	public void setState(String state) {
-		State = state;
+		this.State = state;
 	}
 	public String getArea() {
 		return Area;
 	}
 	public void setArea(String area) {
-		Area = area;
+		this.Area = area;
 	}
 	public String getBathrooms() {
 		return Bathrooms;
 	}
 	public void setBathrooms(String bathrooms) {
-		Bathrooms = bathrooms;
+		this.Bathrooms = bathrooms;
 	}
 	public double getPricePerMonth() {
 		return PricePerMonth;
 	}
 	public void setPricePerMonth(double pricePerMonth) {
-		PricePerMonth = pricePerMonth;
+		this.PricePerMonth = pricePerMonth;
 	}
 	public double getApplicationFee() {
 		return ApplicationFee;
 	}
 	public void setApplicationFee(double applicationFee) {
-		ApplicationFee = applicationFee;
+		this.ApplicationFee = applicationFee;
 	}
 	public double getDamageDeposit() {
 		return DamageDeposit;
 	}
 	public void setDamageDeposit(double damageDeposit) {
-		DamageDeposit = damageDeposit;
+		this.DamageDeposit = damageDeposit;
 	}
 	public double getRating() {
 		return Rating;
 	}
 	public void setRating(double rating) {
-		Rating = rating;
+		this.Rating = rating;
 	}
 	public String getDescription() {
 		return Description;
 	}
 	public void setDescription(String description) {
-		Description = description;
+		this.Description = description;
 	}
 	public int getAvailability() {
 		return Availability;
 	}
 	public void setAvailability(int availability) {
-		Availability = availability;
+		this.Availability = availability;
 	}
 	public Date getAvailableDate() {
 		return AvailableDate;
 	}
 	public void setAvailableDate(Date availableDate) {
-		AvailableDate = availableDate;
+		this.AvailableDate = availableDate;
 	}
 	public int getAgentId() {
 		return AgentId;
 	}
 	public void setAgentId(int agentId) {
-		AgentId = agentId;
+		this.AgentId = agentId;
 	}
 	public ArrayList<Amenity> getAmenities() {
 		return Amenities;
 	}
 	public void setAmenities(ArrayList<Amenity> amenities) {
-		Amenities = amenities;
+		this.Amenities = amenities;
 	}
 	public ArrayList<CommunityFeature> getCommunityFeatures() {
 		return CommunityFeatures;
 	}
 	public void setCommunityFeatures(ArrayList<CommunityFeature> communityFeatures) {
-		CommunityFeatures = communityFeatures;
+		this.CommunityFeatures = communityFeatures;
 	}
 	public ArrayList<Review> getReviews() {
 		return Reviews;
 	}
 	public void setReviews(ArrayList<Review> reviews) {
-		Reviews = reviews;
+		this.Reviews = reviews;
 	}
 	
 	public static Apartment getApartment(int apartmentId) {

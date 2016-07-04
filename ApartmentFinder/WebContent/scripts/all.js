@@ -25,3 +25,13 @@ $(document).on("submit", "#apartmentForm", function(event) {
 
     event.preventDefault(); // Important! Prevents submitting the form.
 });
+
+$("#cartRemove").click(function() {
+    var itemId = $(this).closest("tr").find('#cartid').val();         
+
+    var params = {
+    		itemId: itemId
+    };
+    
+    $.post("RemoveFromCart", $.param(params), function(response){});   
+});
