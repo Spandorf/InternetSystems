@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.CreditCard;
+import model.Status;
+
 /**
  * Servlet implementation class Bank
  */
@@ -24,15 +27,20 @@ public class Bank extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cardId = Integer.parseInt(request.getParameter("cardId"));
+		String cardholderName = request.getParameter("cardholderName");
+		String ccNumber = request.getParameter("creditCardNumber");
+		String cardType = request.getParameter("cardType");
+		String cvv = request.getParameter("cvv");
 		double cost = Double.parseDouble(request.getParameter("cost"));
 		
-		model.Bank bankQuery = new model.Bank(cardId, cost);
-		Boolean successful = model.Bank.CheckBalance(bankQuery);
+		CreditCard cc = new CreditCard(cardholderName, ccNumber, cardType, cvv);
+		model.Bank bankQuery = new model.Bank(cc, cost);
+		Status status = model.Bank.CheckBalance(bankQuery);
 		
 		// trying to respond with json
 		response.setContentType("application/json");
-		response.getWriter().write("transactionSuccess: " + successful.toString());
+		response.getWriter().write("{ transactionSuccess: " + status.getSuccess().toString() + 
+								   ", errorMessage: " + status.getErrorMessage() + "}");
 	}
 
 	/**
