@@ -36,6 +36,9 @@
 						<li>
 							<a href="ManageApplication">Manage Applications</a>
 						</li>
+						<li>
+							<a href="ViewCart">Cart</a>
+						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>

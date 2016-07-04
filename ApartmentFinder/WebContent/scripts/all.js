@@ -9,3 +9,19 @@ $(document).on('click', '#registerBtn', function(event) {
 		event.preventDefault();
 	}
 });
+
+$(document).on("submit", "#apartmentForm", function(event) {
+    var apartmentId = $('#apartmentId').val();
+    var leaseTerm = $('#leaseTerm').val();
+    
+    var params = {
+    		apartmentId: apartmentId,
+    		leaseTerm: leaseTerm
+    };
+    
+    $.post("AddToCart", $.param(params), function(response) {
+        	alert("Apartment added to cart");
+    });
+
+    event.preventDefault(); // Important! Prevents submitting the form.
+});

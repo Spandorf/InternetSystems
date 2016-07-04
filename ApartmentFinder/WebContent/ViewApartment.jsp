@@ -4,10 +4,16 @@
 	<!-- Include library for JSTL tags -->
 	<%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 
+<head>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="/ApartmentFinder/scripts/all.js"></script>
+</head>
+
 <t:layout>
 	<h1>Hello, ${user.username}!</h1>
-	<form method="post" action="Apply">
-		<input type="hidden" name="id" value="${apartment.id}" />
+	<form id="apartmentForm">
+		<input type="hidden" id="apartmentId" name="apartmentId" value="${apartment.id}" />
 		
 		<div class="panel panel-default">
 			<jsp:useBean id="apartment" scope="session" type="model.Apartment" />
@@ -38,7 +44,7 @@
 					</dd>
 					<dt>Lease Term (Months)</dt>
 					<dd>
-						<select name="leaseTerm">
+						<select id="leaseTerm" name="leaseTerm">
 							<option value="6">6 Months</option>
 							<option value="12">12 Months</option>
 						</select>
@@ -46,8 +52,9 @@
 				</dl>
 			</div>
 			<div class="panel-footer clearfix">
-				<input class="btn btn-primary pull-right" type="submit" value="Select" />
+				<input class="btn btn-primary pull-right" type="submit" value="Add to Cart" />
 				<a class="btn btn-default" href="ApartmentSearchResults.jsp">Back</a>
+				<a class="btn btn-default" href="ViewCart">Checkout</a>
 			</div>
 		</div>
 	</form>

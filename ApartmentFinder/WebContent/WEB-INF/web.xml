@@ -98,9 +98,17 @@
   	<servlet-name>CancelApplication</servlet-name>
   	<servlet-class>servlet.CancelApplication</servlet-class>
   </servlet>
-  <servlet-mapping>
+	<servlet-mapping>
   	<servlet-name>CancelApplication</servlet-name>
   	<url-pattern>/CancelApplication</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping><servlet>
+		<servlet-name>AddToCart</servlet-name>
+		<servlet-class>servlet.AddToCart</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddToCart</servlet-name>
+		<url-pattern>/AddToCart</url-pattern>
+	</servlet-mapping>
+	
   
 </web-app>

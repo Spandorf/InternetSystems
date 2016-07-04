@@ -42,12 +42,13 @@ public class Cart {
 	public ArrayList<Integer> getItems() {
 		return CartItems;
 	}
+	
 	public void setItems(ArrayList<Integer> items) {
 		CartItems = items;
 	}
 	
-	public static ArrayList<Integer> getCartItems(int cartId) {
-		ArrayList<Integer> cartItems = new ArrayList<Integer>();
+	public static ArrayList<CartItem> getCartItemsById(int cartId) {
+		ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
 		Connection conn = DBUtil.getConnection();
 		try {
 			String query = "SELECT * from CartItems WHERE CartItems.CartId = ?";
@@ -56,8 +57,10 @@ public class Cart {
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			while(rs.next()){
+				int cartItemId = rs.getInt("Id");
 				int apartment = rs.getInt("ApartmentId");
-				cartItems.add(apartment);
+				int leaseTerm = rs.getInt("LeaseTerm");
+				cartItems.add(new CartItem(cartItemId, leaseTerm, apartment));
 			}
 			preparedStatement.close();
 
@@ -68,32 +71,42 @@ public class Cart {
 		return cartItems;
 	}
 	
-	public static ArrayList<Apartment> getCartItems(ArrayList<Integer> items) {
-		ArrayList<Apartment> apartments = new ArrayList<Apartment>();
+	public static ArrayList<CartItem> getCartItemsApts(ArrayList<CartItem> items) {
 		try {
-			for(Integer item: items){
-				Apartment apartment = Apartment.getApartment(item);
-				apartments.add(apartment);
+			for(CartItem item: items){
+				Apartment apartment = Apartment.getApartment(item.getAptId());
+				item.setApt(apartment);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return apartments;
+		return items;
+	}
+	
+	public static ArrayList<CartItem> getCartItems(int cartId) {
+		ArrayList<CartItem> cartItems = getCartItemsById(cartId);
+		if(cartItems == null || cartItems.isEmpty()){
+			return new ArrayList<CartItem>();
+		}
+		else{
+			cartItems = getCartItemsApts(cartItems);
+			return cartItems;			
+		}		
 	}
 	
 	public static Cart getUserCart(int userId) {
 		Connection conn = DBUtil.getConnection();
 		try {
-			String query = "SELECT * from Cart WHERE Cart.UserId = ?";
+			String query = "SELECT * from Carts WHERE Carts.UserId = ?";
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			preparedStatement.setInt(1, userId);
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			while(rs.next()){
+				Cart cart = new Cart(rs.getInt("Id"), rs.getInt("UserId"));
 				rs.close();
 				preparedStatement.close();
-				Cart cart = new Cart(rs.getInt("Id"), rs.getInt("UserId"));
 				return cart;
 			}
 			rs.close();
@@ -109,7 +122,7 @@ public class Cart {
 	public static void addCart(int userId) {
 		Connection conn = DBUtil.getConnection();
 		try {
-			String query = "insert into Cart (UserId) values (?)";
+			String query = "insert into Carts (UserId) values (?)";
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			preparedStatement.setInt(1, userId);
 			preparedStatement.executeUpdate();
@@ -119,13 +132,14 @@ public class Cart {
 		}
 	}
 	
-	public static void addCartItem(int cartId, int apartmentId) {
+	public static void addCartItem(int cartId, int leaseTerm, int apartmentId) {
 		Connection conn = DBUtil.getConnection();
 		try {
-			String query = "insert into CartItems (CartId, Apartmentid) values (?,?)";
+			String query = "insert into CartItems (CartId, Apartmentid, LeaseTerm) values (?,?,?)";
 			PreparedStatement preparedStatement = conn.prepareStatement(query);
 			preparedStatement.setInt(1, cartId);
 			preparedStatement.setInt(2, apartmentId);
+			preparedStatement.setInt(3, leaseTerm);
 			preparedStatement.executeUpdate();
 			preparedStatement.close();
 		} catch (SQLException e) {
