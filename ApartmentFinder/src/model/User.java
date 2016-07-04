@@ -160,7 +160,6 @@ public class User {
 		CreditCards = creditCards;
 	}
 	
-	
 	public static void registerUser(User user) {
 		
 		Connection conn = DBUtil.getConnection();
@@ -206,6 +205,8 @@ public class User {
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while( resultSet.next() ) {
 				User user = new User(resultSet.getInt("Id"), resultSet.getString("Username"), resultSet.getString("Password"));
+				resultSet.close();
+				preparedStatement.close();
 				return user;
 			}
 			resultSet.close();
