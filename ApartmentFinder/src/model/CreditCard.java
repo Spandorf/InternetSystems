@@ -35,49 +35,49 @@ public class CreditCard {
 		return Id;
 	}
 	public void setId(int id) {
-		Id = id;
+		this.Id = id;
 	}
 	public String getCardholderName() {
 		return CardholderName;
 	}
 	public void setCardholderName(String cardholderName) {
-		CardholderName = cardholderName;
+		this.CardholderName = cardholderName;
 	}
 	public String getCreditCardNumber() {
 		return CreditCardNumber;
 	}
 	public void setCreditCardNumber(String creditCardNumber) {
-		CreditCardNumber = creditCardNumber;
+		this.CreditCardNumber = creditCardNumber;
 	}
 	public double getBalance() {
 		return Balance;
 	}
 	public void setBalance(double balance) {
-		Balance = balance;
+		this.Balance = balance;
 	}
 	public String getCardType() {
 		return CardType;
 	}
 	public void setCardType(String cardType) {
-		CardType = cardType;
+		this.CardType = cardType;
 	}
 	public int getUserId() {
 		return UserId;
 	}
 	public void setUserId(int userId) {
-		UserId = userId;
+		this.UserId = userId;
 	}
 	public String getCVV() {
 		return CVV;
 	}
 	public void setCVV(String cVV) {
-		CVV = cVV;
+		this.CVV = cVV;
 	}
 	public Date getExpirationDate() {
 		return ExpirationDate;
 	}
 	public void setExpirationDate(Date expirationDate) {
-		ExpirationDate = expirationDate;
+		this.ExpirationDate = expirationDate;
 	}
 	
 	public static double getBalance(int ccId) {
