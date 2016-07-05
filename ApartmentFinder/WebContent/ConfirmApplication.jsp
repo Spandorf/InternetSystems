@@ -60,11 +60,11 @@
 					<dl class="dl-horizontal">
 						<dt>Card Holder</dt>
 						<dd>
-							<input class="form-control" type="text" name="cardholder" value="" />
+							<input id="cardholder" class="form-control" type="text" name="cardholder" value="" />
 						</dd>
 						<dt>Card Type</dt>
 						<dd>
-							<select class="form-control" name="card_type">
+							<select id="cardType" class="form-control" name="card_type">
 								<option value="visa">Visa</option>
 								<option value="master">Master</option>
 								<option value="discover">Discover</option>
@@ -72,11 +72,11 @@
 						</dd>
 						<dt>Card Number</dt>
 						<dd>
-							<input class="form-control" type="text" name="card_number" value="" />
+							<input id="cardNumber" class="form-control" type="text" name="card_number" value="" />
 						</dd>
 						<dt>Security Code</dt>
 						<dd>
-							<input class="form-control" type="text" name="sec_code" value="" />
+							<input id="cvv" class="form-control" type="text" name="sec_code" value="" />
 						</dd>
 						<dt>Expiration Date</dt>
 						<dd>

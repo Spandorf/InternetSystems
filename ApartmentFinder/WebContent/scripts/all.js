@@ -49,7 +49,7 @@ $(document).on("submit", "#applicationForm", function(event) {
     var cardholder = $('#cardholder').val();
     var cardType = $('#cardType').val();
     var cardNumber = $('#cardNumber').val();
-    var cvv = $('#cvv');
+    var cvv = $('#cvv').val();
     
     var params = {
     		appTotal: appTotal,
