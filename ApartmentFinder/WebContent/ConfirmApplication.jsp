@@ -11,29 +11,26 @@
 
 <t:layout>
 	<h1>Hello, ${user.username}!</h1>
-	<div class="col-sm-6">
+	<div class="">
 		<div class="col-sm-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Apartment Info
 				</div>
 				<div class="panel-body">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Address</th>
-								<th>Landlord</th>
-								<th>Apartment Type</th>
-								<th>Price per month</th>
-								<th>Lease Term</th>
-								<th>Application Fee</th>
-								<th>Total</th>
-							</tr>
-						</thead>
-					</table>
-					<input type="hidden" id="cartid" name="cartid" value="${cartId}" />
 					<c:forEach var="cart" items="${cartItems}">
 							<table class="table">
+								<thead>
+									<tr>
+										<th>Address</th>
+										<th>Landlord</th>
+										<th>Apartment Type</th>
+										<th>Price per month</th>
+										<th>Lease Term</th>
+										<th>Application Fee</th>
+										<th>Total</th>
+									</tr>
+								</thead>
 								<tbody>
 									<tr>
 										<td>${cart.apartment.address}</td>

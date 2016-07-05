@@ -6,10 +6,12 @@
 
 <t:layout>
 	<h1>Hello, ${user.username}!</h1>
+	
 	<div class="panel panel-default">
 		<div class="panel-heading">
 		Shopping Cart
 		</div>
+		<div class="panel-body">
 		<div>
 			<c:choose>
 				<c:when test="${cartEmpty=='1'}">
@@ -20,45 +22,39 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Address</th>
-					<th>Landlord</th>
-					<th>Apartment Type</th>
-					<th>Price per month</th>
-					<th>Lease Term</th>
-					<th>Application Fee</th>
-					<th>Total</th>
-					<th></th>
-				</tr>
-			</thead>
-		</table>
-		<!-- Since we can't put forms in a table, define a table for each row. It will look like one table anyway. -->
-		<form name="cartApt" id="cartApt" action="Apply">
-		<input type="hidden" id="cartid" name="cartid" value="${cartId}" />
 		<c:forEach var="cart" items="${cartItems}">
-				<table class="table">
-					<tbody>
-						<tr>
-							<td>${cart.apartment.address}</td>
-							<td>${cart.apartment.landlord}</td>
-							<td>${cart.apartment.aptType}</td>
-							<td>${cart.apartment.rating}</td>
-							<td>${cart.leaseTerm}</td>
-							<td>${cart.apartment.applicationFee}</td>
-							<td>${cart.total}</td>
-							<td class="clearfix">
-								<input type="submit" id="cartRemove" name="cartRemove" class="btn btn-primary pull-right" value="Remove" />
-							</td>
-						</tr>
-					</tbody>
-			   </table>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Address</th>
+						<th>Landlord</th>
+						<th>Apartment Type</th>
+						<th>Price per month</th>
+						<th>Lease Term</th>
+						<th>Application Fee</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>${cart.apartment.address}</td>
+						<td>${cart.apartment.landlord}</td>
+						<td>${cart.apartment.aptType}</td>
+						<td>${cart.apartment.pricePerMonth}</td>
+						<td>${cart.leaseTerm}</td>
+						<td>${cart.apartment.applicationFee}</td>
+						<td>${cart.total}</td>
+					</tr>
+				</tbody>
+		   </table>
 		</c:forEach>
-			<div class="clearfix">
+		<form name="cartApt" id="cartApt" action="Apply">
+		<input type="hidden" id="cartId" name="cartId" value="${cartId}" />
+			<div class="panel-footer clearfix">
 				<input class="btn btn-primary pull-right" type="submit" value="Checkout" />
 				<a class="btn btn-default" href="CustomerHome.jsp">Continue Shopping</a>
 			</div>
 		</form>
+	</div>
 	</div>
 </t:layout>
