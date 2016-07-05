@@ -35,50 +35,43 @@ $("#cartRemove").click(function() {
     $.post("RemoveFromCart", $.param(params), function(response){});   
 });
 
-$(document).on("submit", "#applicationForm", function(event) {
-    var apartmentId = $('#apartmentId').val();
-    var leaseTerm = $('#leaseTerm').val();
-    
-    var params = {
-    };
-    
-
-});
 
 
-
-// hide the message containers initially
+//hide the message containers initially
 $(document).ready(function() {
 	$('#successMessage').hide();
 	$('#failureMessage').hide();
 });
 
-$(document).on('click', '#confirmPaymentBtn', function() {
-	var data = {};
-	data.cost = $("#cost").val();
-	data.cardholder = $("#cardholder").val();
-	data.cardType = $("#cardType").val();
-	data.cardNumber = $("#cardNumber").val();
-	data.cvv = $("#cvv").val();
-	
-	$.ajax({
-		url: '../Banking/Bank',
-		data: JSON.stringify(data),
-		type: 'POST',
-		success: function(response) {
-			console.log(response);
-			if(response.success) {
-				$('#successMessage').innerHtml('<b>Success!</b> The transaction was successful.');
-				$('#successMessage').show();
-			}
-			else {
-				$('#failureMessage').innerHtml('<b>Error!</b> ' + response.errorMessage);
-				$('#successMessage').show();
-			}
-		},
-		error: function(response) {
-			console.log(response);
-			$('#failureMessage').innerHtml('<b>Error!</b> The transaction was not successful.');
+$(document).on("submit", "#applicationForm", function(event) {
+    var appTotal = $('#appTotal').val();
+    var cartId = $('#cartId').val();
+    var cardholder = $('#cardholder').val();
+    var cardType = $('#cardType').val();
+    var cardNumber = $('#cardNumber').val();
+    var cvv = $('#cvv');
+    
+    var params = {
+    		appTotal: appTotal,
+    		cartId: cartId,
+    		cardholder: cardholder,
+    		cardType: cardType,
+    		cardNumber: cardNumber,
+    		cvv: cvv
+    };
+    
+    $.post('../Banking/Bank', $.param(params), function(response) {
+		console.log(response);
+		if(response.success) {
+			$('#successMessage').innerHtml('<b>Success!</b> The transaction was successful.');
+			$('#successMessage').show();
 		}
-	});
+		else {
+			$('#failureMessage').innerHtml('<b>Error!</b> ' + response.errorMessage);
+			$('#successMessage').show();
+		}
+    }).error(function(response) {
+    	alert('Banking server is down.');
+    });
+
 });

@@ -50,8 +50,8 @@
 	</div>
 	<div class="col-sm-6">
 		<form id="applicationForm">
-			<input name="appTotal" type="hidden" value="${appTotal}" />
-			<input name="cartId" type="hidden" value="${cartId}" />
+			<input id="appTotal" name="appTotal" type="hidden" value="${appTotal}" />
+			<input id="cartId" name="cartId" type="hidden" value="${cartId}" />
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					Payment Info

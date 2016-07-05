@@ -48,13 +48,13 @@
 				</tbody>
 		   </table>
 		</c:forEach>
+	</div>
 		<form name="cartApt" id="cartApt" action="Apply">
-		<input type="hidden" id="cartId" name="cartId" value="${cartId}" />
+			<input type="hidden" id="cartId" name="cartId" value="${cartId}" />
 			<div class="panel-footer clearfix">
 				<input class="btn btn-primary pull-right" type="submit" value="Checkout" />
 				<a class="btn btn-default" href="CustomerHome.jsp">Continue Shopping</a>
 			</div>
 		</form>
-	</div>
 	</div>
 </t:layout>
