@@ -18,13 +18,33 @@ $(document).on("submit", "#apartmentForm", function(event) {
     		apartmentId: apartmentId,
     		leaseTerm: leaseTerm
     };
-    
+    event.preventDefault();
     $.post("AddToCart", $.param(params), function(response) {
         	alert("Apartment added to cart");
     });
 
-    event.preventDefault(); // Important! Prevents submitting the form.
 });
+
+$("#cartRemove").click(function() {
+    var itemId = $(this).closest("tr").find('#cartid').val();         
+
+    var params = {
+    		itemId: itemId
+    };
+    
+    $.post("RemoveFromCart", $.param(params), function(response){});   
+});
+
+$(document).on("submit", "#applicationForm", function(event) {
+    var apartmentId = $('#apartmentId').val();
+    var leaseTerm = $('#leaseTerm').val();
+    
+    var params = {
+    };
+    
+});
+
+
 
 // hide the message containers initially
 $(document).ready(function() {
