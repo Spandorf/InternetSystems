@@ -26,17 +26,17 @@
 					<th>Address</th>
 					<th>Landlord</th>
 					<th>Apartment Type</th>
-					<th>Area of Apartment</th>
-					<th>Company rating</th>
 					<th>Price per month</th>
 					<th>Lease Term</th>
 					<th>Application Fee</th>
+					<th>Total</th>
 					<th></th>
 				</tr>
 			</thead>
 		</table>
 		<!-- Since we can't put forms in a table, define a table for each row. It will look like one table anyway. -->
 		<form name="cartApt" id="cartApt" action="Apply">
+		<input type="hidden" id="cartid" name="cartid" value="${cartId}" />
 		<c:forEach var="cart" items="${cartItems}">
 				<table class="table">
 					<tbody>
@@ -44,13 +44,11 @@
 							<td>${cart.apartment.address}</td>
 							<td>${cart.apartment.landlord}</td>
 							<td>${cart.apartment.aptType}</td>
-							<td>${cart.apartment.area}</td>
 							<td>${cart.apartment.rating}</td>
-							<td>${cart.apartment.pricePerMonth}</td>
 							<td>${cart.leaseTerm}</td>
 							<td>${cart.apartment.applicationFee}</td>
+							<td>${cart.total}</td>
 							<td class="clearfix">
-								<input type="hidden" id="cartid" name="cartid" value="${cart.cartItemId}" />
 								<input type="submit" id="cartRemove" name="cartRemove" class="btn btn-primary pull-right" value="Remove" />
 							</td>
 						</tr>

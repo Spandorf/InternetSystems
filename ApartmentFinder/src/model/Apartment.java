@@ -205,6 +205,14 @@ public class Apartment {
 		this.Reviews = reviews;
 	}
 	
+	public boolean isAvailable(int leaseTerm, Apartment apartment){
+		if(apartment.getAvailability() == 1){
+			return true;
+		}
+		return false;
+	}
+	
+	
 	public static Apartment getApartment(int apartmentId) {
 		Apartment apartment = null;
 		Connection conn = DBUtil.getConnection();

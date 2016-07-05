@@ -7,6 +7,7 @@ public class CartItem {
 	private Apartment Apartment;
 	private int LeaseTerm;
 	private int AptId;
+	private double Total;
 	
 	public CartItem(int cartItemId, int leaseTerm, Apartment apartment) {
 		super();
@@ -20,6 +21,16 @@ public class CartItem {
 		CartItemId = cartItemId;
 		LeaseTerm = leaseTerm;
 		AptId = aptId;
+	}
+	
+	public double getTotal(){
+		if(this.Apartment != null){
+			return this.Apartment.getDamageDeposit() + this.Apartment.getApplicationFee();			
+		}
+		else{
+			return 0;
+		}
+		
 	}
 	
 	public int getCartItemId() {

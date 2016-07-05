@@ -44,13 +44,13 @@ public class Application {
 		return Id;
 	}
 	public void setId(int id) {
-		Id = id;
+		this.Id = id;
 	}
 	public Apartment getApartment() {
 		return Apartment;
 	}
 	public void setApartment(Apartment apartment) {
-		Apartment = apartment;
+		this.Apartment = apartment;
 	}
 	public int getStatus() {
 		return status;

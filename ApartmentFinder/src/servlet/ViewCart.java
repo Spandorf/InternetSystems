@@ -53,7 +53,7 @@ public class ViewCart extends HttpServlet {
 					session.setAttribute("cartEmpty", 0);
 				}
 			}
-
+			session.setAttribute("cartId", cart.getId());
 			session.setAttribute("cartItems", cartItems);
 		    RequestDispatcher dispatcher = request.getRequestDispatcher("ShoppingCart.jsp");
 		    dispatcher.forward(request, response);
