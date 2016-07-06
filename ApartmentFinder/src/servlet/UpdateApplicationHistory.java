@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
@@ -18,6 +19,8 @@ import model.TransactionInfo;
 import model.User;
 import model.Apartment;
 import model.Application;
+import model.Cart;
+import model.CartItem;
 
 /**
  * Servlet implementation class CustomerTransactionConfirmation
@@ -37,45 +40,21 @@ public class UpdateApplicationHistory extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		double cost = Double.parseDouble(request.getParameter("cost"));
-		String cardholderName = request.getParameter("cardholder");
-		String creditCardNumber = request.getParameter("card_number");
-		String cardType = request.getParameter("card_type");
-		String cvv = request.getParameter("sec_code");
-		int leaseTerm = Integer.parseInt(request.getParameter("leaseTerm"));
-		Date expirationDate = null;
-		try {
-			java.util.Date utilDate = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(request.getParameter("exp_date"));
-			expirationDate = new Date(utilDate.getTime());
-		} catch(Exception e) {
-			// TODO: handle date parse exception
-		}
-		
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		if(user != null && !user.getUsername().isEmpty()){
-			
-			int id = CreditCard.getCreditCardIdByNumber(creditCardNumber);
-			CreditCard cc = new CreditCard(id, cardholderName, creditCardNumber, 0, cardType, user.getId(), cvv, expirationDate);
-
-			Apartment apartment = Apartment.getApartment(Integer.parseInt(request.getParameter("aptId")));
-			int numApps = Application.getNumApps(apartment.getId()) + 1;
-			String appNum = apartment.getId() + "-" + numApps;
-			
-			String errorMessage = CreditCard.validateCC(cc, cost);
-			if(errorMessage == null) { // means no error
-				// TODO: associate application to user, reduce balance of cc
-				Application application = new Application(0, apartment, 0, appNum, expirationDate, user.getId(), expirationDate, leaseTerm, cost, "", 1);
+			int cartId = Integer.parseInt(request.getParameter("cartId"));
+			java.sql.Date appDate = new java.sql.Date(new java.util.Date().getDate());
+			ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
+			cartItems = Cart.getCartItems(cartId);
+			for(CartItem cartItem : cartItems){
+				Apartment apt = cartItem.getApartment();
+				int numApps = Application.getNumApps(apt.getId()) + 1;
+				String appNum = apt.getId() + "-" + numApps;
+				Application application = new Application(0, apt, 0, appNum, appDate, user.getId(), appDate, cartItem.getLeaseTerm(), cartItem.getTotal(), "", 1);
 				Application.addApplication(application);
-				Application completedApp = Application.getAppByAppNum(appNum);
-				TransactionInfo transInfo = new TransactionInfo(apartment, completedApp);
-				session.setAttribute("transaction", transInfo);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("TransactionConfirmation.jsp");
-				dispatcher.forward(request, response);
-			} else {
-				session.setAttribute("errorMessage", errorMessage);
+				Cart.removeCartItem(cartItem.getCartItemId());
 			}
-			
 		}
 		else{
 			response.sendRedirect("Welcome.jsp");
