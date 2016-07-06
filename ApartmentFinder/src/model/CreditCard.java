@@ -80,6 +80,7 @@ public class CreditCard {
 		this.ExpirationDate = expirationDate;
 	}
 	
+	//Pulls the balance for a credit card
 	public static double getBalance(int ccId) {
 		double balance = 0;
 		Connection conn = DBUtil.getConnection();
@@ -98,6 +99,7 @@ public class CreditCard {
 		return balance;
 	}
 	
+	//Updates the balance for a cc
 	public static void updateBalance(int ccId, double balance) {
 		Connection conn = DBUtil.getConnection();
 		try {
@@ -112,6 +114,7 @@ public class CreditCard {
 		}
 	}
 	
+	//Pulls the ccId for a credit card number
 	public static int getCreditCardIdByNumber(String creditCardNumber) {
 		int id = 0;
 		Connection conn = DBUtil.getConnection();

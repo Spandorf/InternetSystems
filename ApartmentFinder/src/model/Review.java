@@ -64,6 +64,7 @@ public class Review {
 		this.ApartmentId = apartmentId;
 	}
 	
+	//Pulls the reviews for an apartment
 	public static ArrayList<Review> getReviews(int apartmentId) {
 		ArrayList<Review> reviews = new ArrayList<Review>();
 		Connection conn = DBUtil.getConnection();

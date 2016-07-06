@@ -107,6 +107,7 @@ public class Application {
 		this.AgentId = agentId;
 	}
 	
+	//Returns the number of applications for an apartment
 	public static int getNumApps(int aptId){
 		Connection conn = DBUtil.getConnection();
 		int count = 0;
@@ -126,6 +127,7 @@ public class Application {
 		return count;
 	}
 	
+	//Gets an application from the db by application number
 	public static Application getAppByAppNum(String applNum) {
 		Application app = null;
 		Connection conn = DBUtil.getConnection();
@@ -159,6 +161,7 @@ public class Application {
 		return app;
 	}
 	
+	//Gets apps from the db for a user
 	public static ArrayList<Application> getUserApps(int userId) {
 		ArrayList<Application> apps = new ArrayList<Application>();
 		Connection conn = DBUtil.getConnection();
@@ -197,6 +200,7 @@ public class Application {
 		return apps;
 	}
 	
+	//Pulls an app from the db by id
 	public static Application getApp(int appId) {
 		Application app = null;
 		Connection conn = DBUtil.getConnection();
@@ -232,6 +236,7 @@ public class Application {
 		return app;
 	}
 	
+	//Adds an app to the db
 	public static void addApplication(Application app) {
 		
 		Connection conn = DBUtil.getConnection();
@@ -256,6 +261,7 @@ public class Application {
 		}
 	}
 	
+	//Deletes an app from the db
 	public static void cancelApplication(Application app) {
 		
 		Connection conn = DBUtil.getConnection();

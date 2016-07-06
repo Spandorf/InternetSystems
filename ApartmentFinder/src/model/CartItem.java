@@ -23,6 +23,7 @@ public class CartItem {
 		AptId = aptId;
 	}
 	
+	//Calculate the total cost of an application
 	public double getTotal(){
 		if(this.Apartment != null){
 			return this.Apartment.getDamageDeposit() + this.Apartment.getApplicationFee();			

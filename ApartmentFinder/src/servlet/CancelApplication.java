@@ -29,11 +29,11 @@ public class CancelApplication extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int appId = Integer.parseInt(request.getParameter("id"));
-		Application app = Application.getApp(appId);
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		if(user != null && !user.getUsername().isEmpty()){
+			int appId = Integer.parseInt(request.getParameter("id"));
+			Application app = Application.getApp(appId);
 			session.setAttribute("application", app);
 			Application.cancelApplication(app);
 		    RequestDispatcher dispatcher = request.getRequestDispatcher("CancellationConfirmation.jsp");

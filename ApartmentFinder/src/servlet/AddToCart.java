@@ -30,14 +30,14 @@ public class AddToCart extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int aptId = Integer.parseInt(request.getParameter("apartmentId"));
-		int leaseTerm = Integer.parseInt(request.getParameter("leaseTerm"));
-		
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		if(user != null && !user.getUsername().isEmpty()){
+			int aptId = Integer.parseInt(request.getParameter("apartmentId"));
+			int leaseTerm = Integer.parseInt(request.getParameter("leaseTerm"));
 			int userId = user.getId();
 			Cart cart = Cart.getUserCart(userId);
+			//If the user doesnt have a cart yet add one in the db
 			if(cart == null){
 				Cart.addCart(userId);
 				cart = Cart.getUserCart(userId);

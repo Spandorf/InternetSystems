@@ -160,6 +160,7 @@ public class User {
 		this.CreditCards = creditCards;
 	}
 	
+	//Adds a user to the db
 	public static void registerUser(User user) {
 		
 		Connection conn = DBUtil.getConnection();
@@ -187,6 +188,7 @@ public class User {
 		return null;
 	}
 	
+	//Checks if user exists in db
 	private static Boolean doesUserExist(String username) {
 		if(getUserByName(username) == null){
 			return false;
@@ -196,6 +198,7 @@ public class User {
 		}
 	}
 	
+	//Pulls user by username
 	private static User getUserByName(String username) {
 		Connection conn = DBUtil.getConnection();
 		try {

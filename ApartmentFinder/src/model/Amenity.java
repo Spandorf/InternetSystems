@@ -39,6 +39,7 @@ public class Amenity {
 		this.Description = description;
 	}
 	
+	//Gets the amenities for an apartment from the db
 	public static ArrayList<Amenity> getAmenities(int apartmentId) {
 		ArrayList<Amenity> amenities = new ArrayList<Amenity>();
 		Connection conn = DBUtil.getConnection();

@@ -37,24 +37,22 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		double cost = Double.parseDouble(request.getParameter("cost"));
-		String cardholderName = request.getParameter("cardholder");
-		String creditCardNumber = request.getParameter("card_number");
-		String cardType = request.getParameter("card_type");
-		String cvv = request.getParameter("sec_code");
-		int leaseTerm = Integer.parseInt(request.getParameter("leaseTerm"));
-		Date expirationDate = null;
-		try {
-			java.util.Date utilDate = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(request.getParameter("exp_date"));
-			expirationDate = new Date(utilDate.getTime());
-		} catch(Exception e) {
-			// TODO: handle date parse exception
-		}
-		
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		if(user != null && !user.getUsername().isEmpty()){
-			
+			double cost = Double.parseDouble(request.getParameter("cost"));
+			String cardholderName = request.getParameter("cardholder");
+			String creditCardNumber = request.getParameter("card_number");
+			String cardType = request.getParameter("card_type");
+			String cvv = request.getParameter("sec_code");
+			int leaseTerm = Integer.parseInt(request.getParameter("leaseTerm"));
+			Date expirationDate = null;
+			try {
+				java.util.Date utilDate = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).parse(request.getParameter("exp_date"));
+				expirationDate = new Date(utilDate.getTime());
+			} catch(Exception e) {
+				// TODO: handle date parse exception
+			}
 			int id = CreditCard.getCreditCardIdByNumber(creditCardNumber);
 			CreditCard cc = new CreditCard(id, cardholderName, creditCardNumber, 0, cardType, user.getId(), cvv, expirationDate);
 
@@ -64,7 +62,6 @@ public class CustomerTransactionConfirmation extends HttpServlet {
 			
 			String errorMessage = CreditCard.validateCC(cc, cost);
 			if(errorMessage == null) { // means no error
-				// TODO: associate application to user, reduce balance of cc
 				Application application = new Application(0, apartment, 0, appNum, expirationDate, user.getId(), expirationDate, leaseTerm, cost, "", 1);
 				Application.addApplication(application);
 				Application completedApp = Application.getAppByAppNum(appNum);

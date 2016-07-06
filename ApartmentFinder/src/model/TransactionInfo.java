@@ -26,6 +26,7 @@ public class TransactionInfo {
 		this.application = application;
 	}
 	
+	//Pulls the apartment info for an id and builds the empty transaction model
 	public static TransactionInfo getTransactionInfo(int apartmentId, int leaseTerm) {
 		Apartment apartment = Apartment.getApartment(apartmentId);
 		double cost = apartment.getApplicationFee();

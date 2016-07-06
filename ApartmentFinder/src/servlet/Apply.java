@@ -33,22 +33,24 @@ public class Apply extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cartId = Integer.parseInt(request.getParameter("cartId"));
-		ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
-		cartItems = Cart.getCartItems(cartId);
-		
-		boolean available = true;
-		double appTotal = 0;  
-		for(CartItem cartItem : cartItems){
-			Apartment apart = cartItem.getApartment();
-			if(!cartItem.getApartment().isAvailable(cartItem.getLeaseTerm(), apart)){
-				available = false;
-				appTotal += cartItem.getTotal();
-			}
-		}
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		if(user != null && !user.getUsername().isEmpty()){
+			int cartId = Integer.parseInt(request.getParameter("cartId"));
+			ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
+			cartItems = Cart.getCartItems(cartId);
+			
+			boolean available = true;
+			double appTotal = 0;  
+			//Check if each apartment is available
+			for(CartItem cartItem : cartItems){
+				Apartment apart = cartItem.getApartment();
+				if(!cartItem.getApartment().isAvailable(cartItem.getLeaseTerm(), apart)){
+					available = false;
+					//Adds up the total for all applications
+					appTotal += cartItem.getTotal();
+				}
+			}
 			if(available){
 				session.setAttribute("cartId", cartId);
 				session.setAttribute("appTotal", appTotal);

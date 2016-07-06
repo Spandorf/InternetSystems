@@ -41,6 +41,7 @@ public class ViewCart extends HttpServlet {
 			int userId = user.getId();
 			Cart cart = Cart.getUserCart(userId);
 			ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
+			double appTotal = 0;
 			if(cart == null){
 				session.setAttribute("cartEmpty", 1);
 			}
@@ -48,10 +49,16 @@ public class ViewCart extends HttpServlet {
 				cartItems = Cart.getCartItems(cart.getId());
 				if(cartItems == null || cartItems.isEmpty()){
 					session.setAttribute("cartEmpty", 1);
+					session.setAttribute("total", appTotal);
 				}
 				else{
 					session.setAttribute("cartEmpty", 0);
-				}
+					for(CartItem cartItem : cartItems){
+							//Adds up the total for all applications
+							appTotal += cartItem.getTotal();
+						}
+					}
+					session.setAttribute("total", appTotal);
 			}
 			session.setAttribute("cartId", cart.getId());
 			session.setAttribute("cartItems", cartItems);

@@ -39,6 +39,7 @@ public class CommunityFeature {
 		this.Description = description;
 	}
 	
+	//Pulls the community features for an apartment
 	public static ArrayList<CommunityFeature> getCommunityFeatures(int apartmentId) {
 		ArrayList<CommunityFeature> commFeatures = new ArrayList<CommunityFeature>();
 		Connection conn = DBUtil.getConnection();

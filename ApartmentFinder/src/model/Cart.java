@@ -14,6 +14,7 @@ public class Cart {
 	private int UserId;
 	private ArrayList<Integer> CartItems;
 	
+	//constructor with list of items
 	public Cart(int cartId, int userId, ArrayList<Integer> items) {
 		super();
 		CartId = cartId;
@@ -21,6 +22,7 @@ public class Cart {
 		CartItems = items;
 	}
 	
+	//base constructor
 	public Cart(int cartId, int userId) {
 		super();
 		CartId = cartId;
@@ -47,6 +49,7 @@ public class Cart {
 		this.CartItems = items;
 	}
 	
+	//Pulls cart items for a specified cart
 	public static ArrayList<CartItem> getCartItemsById(int cartId) {
 		ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
 		Connection conn = DBUtil.getConnection();
@@ -71,6 +74,7 @@ public class Cart {
 		return cartItems;
 	}
 	
+	//Method to populate the apartment property for a list of CartItems
 	public static ArrayList<CartItem> getCartItemsApts(ArrayList<CartItem> items) {
 		try {
 			for(CartItem item: items){
@@ -84,6 +88,7 @@ public class Cart {
 		return items;
 	}
 	
+	//Wrapper method to pull cart items for a cart and populate apartment data for those items
 	public static ArrayList<CartItem> getCartItems(int cartId) {
 		ArrayList<CartItem> cartItems = getCartItemsById(cartId);
 		if(cartItems == null || cartItems.isEmpty()){
@@ -95,6 +100,7 @@ public class Cart {
 		}		
 	}
 	
+	//Returns a cart for a specified user
 	public static Cart getUserCart(int userId) {
 		Connection conn = DBUtil.getConnection();
 		try {
@@ -119,6 +125,7 @@ public class Cart {
 		return null;
 	}
 	
+	//Creates a cart for the user
 	public static void addCart(int userId) {
 		Connection conn = DBUtil.getConnection();
 		try {
@@ -132,6 +139,7 @@ public class Cart {
 		}
 	}
 	
+	//Adds a cart item to the db
 	public static void addCartItem(int cartId, int leaseTerm, int apartmentId) {
 		Connection conn = DBUtil.getConnection();
 		try {
@@ -147,6 +155,7 @@ public class Cart {
 		}
 	}
 	
+	//Removes a cart item from the db
 	public static void removeCartItem(int cartItemId) {
 		
 		Connection conn = DBUtil.getConnection();

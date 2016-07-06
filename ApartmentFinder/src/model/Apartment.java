@@ -57,6 +57,7 @@ public class Apartment {
 		AgentId = agentId;
 	}
 	
+	//Constructor with amenities, community features, and reviews
 	public Apartment(int id, String landlord, String aptNumber, String aptType, String address, String city,
 			String state, String area, String bathrooms, double pricePerMonth, double applicationFee,
 			double damageDeposit, double rating, String description, int availability, Date availableDate, int agentId,
@@ -205,6 +206,7 @@ public class Apartment {
 		this.Reviews = reviews;
 	}
 	
+	//Returns the availability of the apartment
 	public boolean isAvailable(int leaseTerm, Apartment apartment){
 		if(apartment.getAvailability() == 1){
 			return true;
@@ -212,7 +214,7 @@ public class Apartment {
 		return false;
 	}
 	
-	
+	//Pulls an apartment for the specified id
 	public static Apartment getApartment(int apartmentId) {
 		Apartment apartment = null;
 		Connection conn = DBUtil.getConnection();

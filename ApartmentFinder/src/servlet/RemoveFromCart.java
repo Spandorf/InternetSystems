@@ -32,11 +32,10 @@ public class RemoveFromCart extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int itemId = Integer.parseInt(request.getParameter("itemId"));
-		
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		if(user != null && !user.getUsername().isEmpty()){
+			int itemId = Integer.parseInt(request.getParameter("itemId"));
 			Cart.removeCartItem(itemId);
 			int userId = user.getId();
 			Cart cart = Cart.getUserCart(userId);

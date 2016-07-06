@@ -57,6 +57,7 @@ public class ApartmentQuery {
 		this.ApartmentType = apartmentType;
 	}
 	
+	//Checks for search criteria
 	public boolean hasCriteria(ApartmentQuery queryData){
 		if((queryData.getApartmentType() != null && !queryData.getApartmentType().isEmpty()) || 
 				(queryData.getMoveInDate() != null) ||
@@ -68,6 +69,7 @@ public class ApartmentQuery {
 		return false;
 	}
 	
+	//Pulls apartments from the db for a specified query
 	public static ArrayList<Apartment> FindApartments(ApartmentQuery queryData) {
 		ArrayList<Apartment> apartments = new ArrayList<Apartment>();
 		Connection conn = DBUtil.getConnection();
