@@ -205,7 +205,7 @@ public class Apartment {
 		this.Reviews = reviews;
 	}
 	
-	public boolean isAvailable(int leaseTerm, Apartment apartment){
+	public static boolean isAvailable(int leaseTerm, Apartment apartment){
 		if(apartment.getAvailability() == 1){
 			return true;
 		}
