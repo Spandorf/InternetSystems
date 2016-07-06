@@ -109,6 +109,14 @@
 		<servlet-name>AddToCart</servlet-name>
 		<url-pattern>/AddToCart</url-pattern>
 	</servlet-mapping>
-	
-  
+	<servlet>
+		<servlet-name>UpdateApplicationHistory</servlet-name>
+		<servlet-class>servlet.UpdateApplicationHistory</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateApplicationHistory</servlet-name>
+		<url-pattern>/UpdateApplicationHistory</url-pattern>
+	</servlet-mapping>
+
+
 </web-app>
