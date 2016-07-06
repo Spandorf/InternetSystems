@@ -91,6 +91,7 @@ public class Bank {
 				String cardNumber = rs.getString("CreditCardNumber");
 				String cvv = rs.getString("CVV");
 				double balance = rs.getDouble("Balance");
+				rs.close();
 				prepState.close();
 				
 				// make sure cc info is correct
@@ -118,6 +119,8 @@ public class Bank {
 				}
 			} else {
 				status.setErrorMessage("Card not found.");
+				rs.close();
+				prepState.close();
 				return status;
 			}
 			

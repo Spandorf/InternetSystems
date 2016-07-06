@@ -38,7 +38,7 @@ public class Bank extends HttpServlet {
 		// trying to respond with json
 		response.setContentType("application/json");
 		response.getWriter().write("{ transactionSuccess: " + status.getSuccess().toString() + 
-								   ", errorMessage: " + status.getErrorMessage() + "}");
+								   ", errorMessage: '" + status.getErrorMessage() + "'}");
 	}
 
 	/**

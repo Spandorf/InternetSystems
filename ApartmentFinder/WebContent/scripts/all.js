@@ -44,6 +44,7 @@ $(document).ready(function() {
 });
 
 $(document).on("submit", "#applicationForm", function(event) {
+	event.preventDefault();
     var appTotal = $('#appTotal').val();
     var cartId = $('#cartId').val();
     var cardholder = $('#cardholder').val();
@@ -60,7 +61,8 @@ $(document).on("submit", "#applicationForm", function(event) {
     		cvv: cvv
     };
     
-    $.post('../Banking/Bank', $.param(params), function(response) {
+    $.post('../Banking/Bank', $.param(params)).done(function(response) {
+    	alert(response);
 		console.log(response);
 		if(response.success) {
 			$('#successMessage').innerHtml('<b>Success!</b> The transaction was successful.');
@@ -70,8 +72,6 @@ $(document).on("submit", "#applicationForm", function(event) {
 			$('#failureMessage').innerHtml('<b>Error!</b> ' + response.errorMessage);
 			$('#successMessage').show();
 		}
-    }).error(function(response) {
-    	alert('Banking server is down.');
     });
 
 });
