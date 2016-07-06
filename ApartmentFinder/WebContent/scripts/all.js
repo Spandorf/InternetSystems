@@ -61,25 +61,33 @@ $(document).on("submit", "#applicationForm", function(event) {
     		cvv: cvv
     };
     
-
-    
-    
     $.ajax({
     	type: 'POST',
     	url: '../Banking/Bank',
     	data: $.param(params),
     	success: function(response) {
     		handleResponse(response);
+    		
+    		updateHistory();
     	},
     	error: function(response) {
     		handleResponse(response);
     	}
     });
+    
+    // call to update the app history
+    var updateHistory = function() {
+    	var params = {
+    			cartId: cartId
+    	};
+    	
+    	$.post('UpdateApplicationHistory', $.param(params), function(response) {console.log(response)});
+    }
 
 });
 
 var handleResponse = function(response) {
-	if(response.success) {
+	if(response.transactionSuccess) {
 		$('#successMessage').html('<b>Success!</b> The transaction was successful.');
 		$('#successMessage').show();
 		$('#failureMessage').hide();

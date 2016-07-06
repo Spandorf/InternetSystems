@@ -78,7 +78,7 @@ public class Bank {
 		Connection conn = DBUtil.getConnection();
 		try {
 			String query = "select * from Carts " + 
-						   "join CreditCards on Carts.UserId = CreditCards.Id " +
+						   "join CreditCards on Carts.UserId = CreditCards.UserId " +
 						   "where Carts.Id = ?";
 			PreparedStatement prepState = conn.prepareStatement(query);
 			prepState.setInt(1, bank.getCartId());
