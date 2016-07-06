@@ -41,6 +41,11 @@ $("#cartRemove").click(function() {
 $(document).ready(function() {
 	$('#successMessage').hide();
 	$('#failureMessage').hide();
+	$('#printBtn').hide();
+});
+
+$(document).on('click', '#printBtn', function(event) {
+	window.print();
 });
 
 $(document).on("submit", "#applicationForm", function(event) {
@@ -68,6 +73,7 @@ $(document).on("submit", "#applicationForm", function(event) {
     	success: function(response) {
     		handleResponse(response);
     		
+    		$('#printBtn').show();
     		updateHistory();
     	},
     	error: function(response) {
