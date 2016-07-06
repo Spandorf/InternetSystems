@@ -6,8 +6,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import model.CreditCard;
 import model.Status;
 
 /**
@@ -27,15 +25,15 @@ public class Bank extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String cardholderName = request.getParameter("cardholderName");
-		String ccNumber = request.getParameter("creditCardNumber");
+		double appTotal = Double.parseDouble(request.getParameter("appTotal"));
+		int cartId = Integer.parseInt(request.getParameter("cartId"));
+		String cardholder = request.getParameter("cardholder");
 		String cardType = request.getParameter("cardType");
+		String cardNumber = request.getParameter("cardNumber");
 		String cvv = request.getParameter("cvv");
-		double cost = Double.parseDouble(request.getParameter("cost"));
 		
-		CreditCard cc = new CreditCard(cardholderName, ccNumber, cardType, cvv);
-		model.Bank bankQuery = new model.Bank(cc, cost);
-		Status status = model.Bank.CheckBalance(bankQuery);
+		model.Bank bank = new model.Bank(appTotal, cartId, cardholder, cardType, cardNumber, cvv);
+		Status status = model.Bank.CheckBalance(bank);
 		
 		// trying to respond with json
 		response.setContentType("application/json");

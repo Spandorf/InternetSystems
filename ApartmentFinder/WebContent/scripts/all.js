@@ -35,11 +35,43 @@ $("#cartRemove").click(function() {
     $.post("RemoveFromCart", $.param(params), function(response){});   
 });
 
+
+
+//hide the message containers initially
+$(document).ready(function() {
+	$('#successMessage').hide();
+	$('#failureMessage').hide();
+});
+
 $(document).on("submit", "#applicationForm", function(event) {
-    var apartmentId = $('#apartmentId').val();
-    var leaseTerm = $('#leaseTerm').val();
+    var appTotal = $('#appTotal').val();
+    var cartId = $('#cartId').val();
+    var cardholder = $('#cardholder').val();
+    var cardType = $('#cardType').val();
+    var cardNumber = $('#cardNumber').val();
+    var cvv = $('#cvv').val();
     
     var params = {
+    		appTotal: appTotal,
+    		cartId: cartId,
+    		cardholder: cardholder,
+    		cardType: cardType,
+    		cardNumber: cardNumber,
+    		cvv: cvv
     };
     
+    $.post('../Banking/Bank', $.param(params), function(response) {
+		console.log(response);
+		if(response.success) {
+			$('#successMessage').innerHtml('<b>Success!</b> The transaction was successful.');
+			$('#successMessage').show();
+		}
+		else {
+			$('#failureMessage').innerHtml('<b>Error!</b> ' + response.errorMessage);
+			$('#successMessage').show();
+		}
+    }).error(function(response) {
+    	alert('Banking server is down.');
+    });
+
 });

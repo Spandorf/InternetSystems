@@ -8,59 +8,102 @@ import java.sql.SQLException;
 import util.DBUtil;
 
 public class Bank {
-	private CreditCard CardDetails;
-	private double Cost;
+	private double AppTotal;
+	private int CartId;
+	private String Cardholder;
+	private String CardType;
+	private String CardNumber;
+	private String Cvv;
 
-	public Bank(CreditCard cardDetails, double cost) {
+	public Bank(double appTotal, int cartId, String cardholder, String cardType, String cardNumber, String cvv) {
 		super();
-		CardDetails = cardDetails;
-		Cost = cost;
+		AppTotal = appTotal;
+		CartId = cartId;
+		Cardholder = cardholder;
+		CardType = cardType;
+		CardNumber = cardNumber;
+		Cvv = cvv;
 	}
 
-	public CreditCard getCardDetails() {
-		return CardDetails;
-	}
-	
-	public void setCardDetails(CreditCard cardDetails) {
-		CardDetails = cardDetails;
-	}
-	
-	public double getCost() {
-		return Cost;
+	public double getAppTotal() {
+		return AppTotal;
 	}
 
-	public void setCost(double cost) {
-		Cost = cost;
+	public void setAppTotal(double appTotal) {
+		AppTotal = appTotal;
 	}
 
-	public static Status CheckBalance(Bank bankCheck) {
+	public int getCartId() {
+		return CartId;
+	}
+
+	public void setCartId(int cartId) {
+		CartId = cartId;
+	}
+
+	public String getCardholder() {
+		return Cardholder;
+	}
+
+	public void setCardholder(String cardholder) {
+		Cardholder = cardholder;
+	}
+
+	public String getCardType() {
+		return CardType;
+	}
+
+	public void setCardType(String cardType) {
+		CardType = cardType;
+	}
+
+	public String getCardNumber() {
+		return CardNumber;
+	}
+
+	public void setCardNumber(String cardNumber) {
+		CardNumber = cardNumber;
+	}
+
+	public String getCvv() {
+		return Cvv;
+	}
+
+	public void setCvv(String cvv) {
+		Cvv = cvv;
+	}
+
+	public static Status CheckBalance(Bank bank) {
 		Status status = new Status(false, "");
 		Connection conn = DBUtil.getConnection();
 		try {
-			String query = "select * from CreditCards where CreditCards.CreditCardNumber = ?";
+			String query = "select * from Carts " + 
+						   "join CreditCards on Carts.UserId = CreditCards.Id " +
+						   "where Carts.Id = ?";
 			PreparedStatement prepState = conn.prepareStatement(query);
-			prepState.setString(1, bankCheck.CardDetails.getCreditCardNumber());
+			prepState.setInt(1, bank.getCartId());
 			ResultSet rs = prepState.executeQuery();
 			
 			if(rs.next()) {
 				int ccId = rs.getInt("Id");
 				String cardholderName = rs.getString("CardholderName");
 				String cardType = rs.getString("CardType");
+				String cardNumber = rs.getString("CreditCardNumber");
 				String cvv = rs.getString("CVV");
 				double balance = rs.getDouble("Balance");
 				prepState.close();
 				
 				// make sure cc info is correct
-				CreditCard ccDetails = bankCheck.getCardDetails();
-				if(!ccDetails.getCardholderName().equals(cardholderName) ||
-				   !ccDetails.getCardType().equals(cardType) ||
-				   !ccDetails.getCVV().equals(cvv)) {
-					status.setErrorMessage("Incorrect card details");
+				if(!bank.getCardholder().equals(cardholderName) ||
+				   !bank.getCardType().equals(cardType) ||
+				   !bank.getCardNumber().equals(cardNumber) ||
+				   !bank.getCvv().equals(cvv)) {
+					status.setErrorMessage("Incorrect card details.");
 					return status;
 				}
 				
 				// check balance of cc, update it if transaction can be completed
-				double newBalance = balance - bankCheck.getCost();
+				double newBalance = balance - bank.getAppTotal();
 				if(newBalance > 0) {
 					status.setSuccess(true);
 					query = "update CreditCards set Balance = ? where Id = ?";
@@ -70,14 +113,14 @@ public class Bank {
 					prepState.executeUpdate();
 					return status;
 				} else {
-					status.setErrorMessage("Balance not high enough");
+					status.setErrorMessage("Balance not high enough.");
 					return status;
 				}
 			} else {
 				status.setErrorMessage("Card not found.");
 				return status;
 			}
-
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
