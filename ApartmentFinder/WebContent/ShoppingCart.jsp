@@ -51,8 +51,8 @@
 		<form name="cartApt" id="cartApt" action="Apply">
 		<input type="hidden" id="cartId" name="cartId" value="${cartId}" />
 			<div class="panel-footer clearfix">
-				<span> Total cost: ${total}</span>
 				<input class="btn btn-primary pull-right" type="submit" value="Checkout" />
+				<span class="pull-right carttotal"> Total cost: ${total}   </span>
 				<a class="btn btn-default" href="CustomerHome.jsp">Continue Shopping</a>
 			</div>
 		</form>
