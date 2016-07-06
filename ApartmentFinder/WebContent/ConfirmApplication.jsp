@@ -18,8 +18,9 @@
 	<div class="">
 		<div class="col-sm-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">
+				<div class="panel-heading clearfix">
 					Apartment Info
+					<div id="printBtn" class="btn btn-primary pull-right">Print</div>
 				</div>
 				<div class="panel-body">
 					<c:forEach var="cart" items="${cartItems}">
