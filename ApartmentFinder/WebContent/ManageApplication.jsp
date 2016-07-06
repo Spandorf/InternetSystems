@@ -13,13 +13,13 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Address</th>
-					<th>Landlord</th>
-					<th>Apartment Type</th>
-					<th>Area of Apartment</th>
-					<th>Company rating</th>
-					<th>Price per month</th>
-					<th>Move-in Date</th>
+					<th class="appAddress">Address</th>
+					<th class="appLandlord">Landlord</th>
+					<th class="appType">Apartment Type</th>
+					<th class="appArea">Area of Apartment</th>
+					<th class="appRating">Company rating</th>
+					<th class="appPrice">Price per month</th>
+					<th class="appDate">Move-in Date</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -31,13 +31,13 @@
 				<table class="table">
 					<tbody>
 						<tr>
-							<td>${app.apartment.address}</td>
-							<td>${app.apartment.landlord}</td>
-							<td>${app.apartment.aptType}</td>
-							<td>${app.apartment.area}</td>
-							<td>${app.apartment.rating}</td>
-							<td>${app.apartment.pricePerMonth}</td>
-							<td>${apt.MoveInDate}</td>
+							<td class="appAddress">${app.apartment.address}</td>
+							<td class="appLandlord">${app.apartment.landlord}</td>
+							<td class="appType">${app.apartment.aptType}</td>
+							<td class="appArea">${app.apartment.area}</td>
+							<td class="appRating">${app.apartment.rating}</td>
+							<td class="appPrice">${app.apartment.pricePerMonth}</td>
+							<td class="appDate">${app.moveInDate}</td>
 							<td class="clearfix">
 								<input type="submit" class="btn btn-primary pull-right" value="Cancel" />
 							</td>

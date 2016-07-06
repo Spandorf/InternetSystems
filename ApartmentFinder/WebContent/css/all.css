@@ -38,3 +38,31 @@ dd {
 	margin-right: 10px;
 	padding-top: 8px;
 }
+
+.appAddress {
+	width: 200px;
+}
+
+.appLandlord {
+	width: 150px;
+}
+
+.appType {
+	width: 100px;
+}
+
+.appArea {
+	width: 100px;
+}
+
+.appRating {
+	width: 100px;
+}
+
+.appPrice {
+	width: 100px;
+}
+
+.appDate {
+	width: 120px;
+}
