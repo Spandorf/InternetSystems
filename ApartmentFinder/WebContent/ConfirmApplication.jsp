@@ -11,6 +11,10 @@
 
 <t:layout>
 	<h1>Hello, ${user.username}!</h1>
+	
+	<div id="successMessage" class="alert alert-success"></div>
+	<div id="failureMessage" class="alert alert-danger"></div>
+	
 	<div class="">
 		<div class="col-sm-12">
 			<div class="panel panel-default">

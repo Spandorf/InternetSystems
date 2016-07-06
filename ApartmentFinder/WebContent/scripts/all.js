@@ -61,17 +61,32 @@ $(document).on("submit", "#applicationForm", function(event) {
     		cvv: cvv
     };
     
-    $.post('../Banking/Bank', $.param(params)).done(function(response) {
-    	alert(response);
-		console.log(response);
-		if(response.success) {
-			$('#successMessage').innerHtml('<b>Success!</b> The transaction was successful.');
-			$('#successMessage').show();
-		}
-		else {
-			$('#failureMessage').innerHtml('<b>Error!</b> ' + response.errorMessage);
-			$('#successMessage').show();
-		}
+
+    
+    
+    $.ajax({
+    	type: 'POST',
+    	url: '../Banking/Bank',
+    	data: $.param(params),
+    	success: function(response) {
+    		handleResponse(response);
+    	},
+    	error: function(response) {
+    		handleResponse(response);
+    	}
     });
 
 });
+
+var handleResponse = function(response) {
+	if(response.success) {
+		$('#successMessage').html('<b>Success!</b> The transaction was successful.');
+		$('#successMessage').show();
+		$('#failureMessage').hide();
+	}
+	else {
+		$('#failureMessage').html('<b>Error!</b> ' + response.errorMessage);
+		$('#failureMessage').show();
+		$('#successMessage').hide();
+	}
+}

@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,20 +27,30 @@ public class Bank extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		double appTotal = Double.parseDouble(request.getParameter("appTotal"));
-		int cartId = Integer.parseInt(request.getParameter("cartId"));
-		String cardholder = request.getParameter("cardholder");
-		String cardType = request.getParameter("cardType");
-		String cardNumber = request.getParameter("cardNumber");
-		String cvv = request.getParameter("cvv");
-		
-		model.Bank bank = new model.Bank(appTotal, cartId, cardholder, cardType, cardNumber, cvv);
-		Status status = model.Bank.CheckBalance(bank);
-		
-		// trying to respond with json
-		response.setContentType("application/json");
-		response.getWriter().write("{ transactionSuccess: " + status.getSuccess().toString() + 
-								   ", errorMessage: '" + status.getErrorMessage() + "'}");
+		try {
+			double appTotal = Double.parseDouble(request.getParameter("appTotal"));
+			int cartId = Integer.parseInt(request.getParameter("cartId"));
+			String cardholder = request.getParameter("cardholder");
+			String cardType = request.getParameter("cardType");
+			String cardNumber = request.getParameter("cardNumber");
+			String cvv = request.getParameter("cvv");
+			
+			model.Bank bank = new model.Bank(appTotal, cartId, cardholder, cardType, cardNumber, cvv);
+			Status status = model.Bank.CheckBalance(bank);
+			
+			// trying to respond with json
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			PrintWriter pw = response.getWriter();
+					
+			pw.print("{ \"transactionSuccess\": " + status.getSuccess().toString() + 
+					 ", \"errorMessage\": \"" + status.getErrorMessage() + "\"}");
+			
+			pw.close();
+		} catch (Exception e) {
+			PrintWriter pw = response.getWriter();
+			pw.print(e.getMessage());
+		}
 	}
 
 	/**

@@ -6,6 +6,9 @@
 
 <t:layout>
 	<h1>Hello, ${user.username}!</h1>
+	
+
+	
 	<div class="col-sm-6">
 		<div class="col-sm-12">
 			<div class="panel panel-default">
